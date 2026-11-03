@@ -1,0 +1,9 @@
+# Compiled GPS reader. JPEG location is read in Python. HEIC uses photo-gps.swift.
+photo-gps
+__pycache__/
+*.pyc
+.DS_Store
+
+# Sign-in and previews belong in ~/.config/paloalto311/, not in git.
+account.json
+preview.json

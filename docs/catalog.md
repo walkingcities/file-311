@@ -20,7 +20,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 
 | Run | Id | Request type |
 | --- | --- | --- |
-|  | 1017001 | [Zoning & Land Use](#zoning-land-use) |
+|  | 1017001 | [Zoning & Land Use](#zoning--land-use) |
 |  | 1020061 | [Substandard Housing](#substandard-housing) |
 |  | 15505 | [Broken Sidewalk](#broken-sidewalk) |
 |  | 1020062 | [Construction Activity (Private Property)](#construction-activity-private-property) |
@@ -47,13 +47,13 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 1016997 | [Gas-Powered Leaf Blowers](#gas-powered-leaf-blowers) |
 |  | 1016995 | [Fences and Walls](#fences-and-walls) |
 |  | 32343 | [Irrigation](#irrigation) |
-|  | 32344 | [Tennis Courts - Indicate Court #](#tennis-courts-indicate-court) |
-|  | 1013714 | [Pickleball Courts - Indicate Court #](#pickleball-courts-indicate-court) |
+|  | 32344 | [Tennis Courts - Indicate Court #](#tennis-courts---indicate-court) |
+|  | 1013714 | [Pickleball Courts - Indicate Court #](#pickleball-courts---indicate-court) |
 |  | 1020084 | [Basketball Courts](#basketball-courts) |
 |  | 1020085 | [Picnic Tables, Benches, BBQ Grills](#picnic-tables-benches-bbq-grills) |
 |  | 1020087 | [Athletic Field Lighting](#athletic-field-lighting) |
 |  | 1020088 | [Field Reservation Issue](#field-reservation-issue) |
-|  | 1020089 | [Field Maintenance - Indicate Field #](#field-maintenance-indicate-field) |
+|  | 1020089 | [Field Maintenance - Indicate Field #](#field-maintenance---indicate-field) |
 |  | 1020090 | [Park Fencing](#park-fencing) |
 |  | 1020091 | [Park Landscaping](#park-landscaping) |
 |  | 1020092 | [Park Pathways](#park-pathways) |
@@ -66,7 +66,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 1017052 | [Playgrounds](#playgrounds) |
 |  | 1003188 | [New bicycle rack or bicycle parking in the public ROW](#new-bicycle-rack-or-bicycle-parking-in-the-public-row) |
 |  | 23012 | [Abandoned Bike or Scooter](#abandoned-bike-or-scooter) |
-|  | 1020228 | [Illegal Dumping - Public Right of Way (P)](#illegal-dumping-public-right-of-way-p) |
+|  | 1020228 | [Illegal Dumping - Public Right of Way (P)](#illegal-dumping---public-right-of-way-p) |
 |  | 1020108 | [Inquiries on Existing/Planned Transportation Projects](#inquiries-on-existingplanned-transportation-projects) |
 |  | 1020060 | [Overgrown Vegetation in Public Right of Way](#overgrown-vegetation-in-public-right-of-way) |
 |  | 1016992 | [Property Maintenance (Private Property)](#property-maintenance-private-property) |
@@ -89,7 +89,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 1008122 | [Hazardous Materials](#hazardous-materials) |
 |  | 1016999 | [Illegal Signs on Public Property/Right of Way](#illegal-signs-on-public-propertyright-of-way) |
 |  | 1016993 | [Noise Violations](#noise-violations) |
-|  | 1020059 | [Vehicle Parking Violation - In the Roadway/Sidewalk](#vehicle-parking-violation-in-the-roadwaysidewalk) |
+|  | 1020059 | [Vehicle Parking Violation - In the Roadway/Sidewalk](#vehicle-parking-violation---in-the-roadwaysidewalk) |
 |  | 15499 | [Missed Street Sweeping Route](#missed-street-sweeping-route) |
 |  | 1016994 | [Public Right of Way Obstructions/Encroachment](#public-right-of-way-obstructionsencroachment) |
 
@@ -336,7 +336,7 @@ Id 1016997. The city forces this report private. An address is required.
 - Phone Number (3611, text, optional, staff-only).
 - Additional Location Description for Request (3656, text, required, staff-only).
 - Observed Date/Time (39746, text, required, staff-only).
-- Please confirm that the address above is correct.  (39747, singleselect, required, staff-only). Options: Yes.
+- Please confirm that the address above is correct. (39747, singleselect, required, staff-only). Options: Yes.
 
 ### Fences and Walls
 

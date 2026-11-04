@@ -58,12 +58,12 @@ def find_type(catalog, query):
         matches = [item for item in catalog if item["id"] == int(query)]
     else:
         needle = query.lower()
-        exact = [item for item in catalog if item["name"].lower() == needle]
-        matches = exact or [item for item in catalog if needle in item["name"].lower()]
+        exact = [item for item in catalog if item["name"].strip().lower() == needle]
+        matches = exact or [item for item in catalog if needle in item["name"].strip().lower()]
     if not matches:
         die(f"No Palo Alto 311 request type matches {query!r}. Run: paloalto311.py list")
     if len(matches) > 1:
-        lines = "\n".join(f"{item['id']}\t{item['name']}" for item in matches)
+        lines = "\n".join(f"{item['id']}\t{item['name'].strip()}" for item in matches)
         die(f"More than one request type matches {query!r}:\n{lines}")
     return matches[0]
 
@@ -166,23 +166,49 @@ def build_custom_fields(request_type, values, account):
             raw = account.get("name")
         if raw is None and field["name"] == "Phone Number" and account:
             raw = account.get("phone")
-        if field["required"] and (raw is None or str(raw).strip() == ""):
+        if field["required"] and blank_field(raw):
             missing.append(field)
             continue
-        if raw is None or str(raw).strip() == "":
+        if blank_field(raw):
             continue
-        if field["options"] and raw not in field["options"]:
-            die(f"{field['name']} must be one of: {', '.join(field['options'])}")
+        if field["type"] == "multiselect":
+            raw = multiselect_values(field, raw)
+        elif field["options"] and raw not in field["options"]:
+            die(f"{field['name'].strip()} must be one of: {', '.join(field['options'])}")
         custom[str(field["id"])] = raw
     return custom, missing
 
 
+def blank_field(raw):
+    if raw is None or raw == []:
+        return True
+    if isinstance(raw, str):
+        return raw.strip() == ""
+    return False
+
+
+def multiselect_values(field, raw):
+    if isinstance(raw, str):
+        chosen = [part.strip() for part in raw.split(",") if part.strip()]
+    elif isinstance(raw, list):
+        chosen = [str(part).strip() for part in raw if str(part).strip()]
+    else:
+        chosen = []
+    seen = []
+    for part in chosen:
+        if part not in seen:
+            seen.append(part)
+    if not seen or any(part not in field["options"] for part in seen):
+        die(f"{field['name'].strip()} must be one of: {', '.join(field['options'])}")
+    return seen
+
+
 def command_list(args):
-    needle = (args.query or "").lower()
+    needle = (args.query or "").strip().lower()
     for item in load_catalog():
-        if needle and needle not in item["name"].lower():
+        if needle and needle not in item["name"].strip().lower():
             continue
-        print(f"{item['id']}\t{item['name']}")
+        print(f"{item['id']}\t{item['name'].strip()}")
 
 
 def command_show(args):

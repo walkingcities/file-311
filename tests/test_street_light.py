@@ -327,6 +327,49 @@ class StreetLightTests(unittest.TestCase):
         self.assertNotEqual(Path(first).name, "street-light.jpg")
         self.assertTrue(Path(first).is_file())
 
+    def test_exact_name_wins_when_the_city_left_a_trailing_space(self):
+        catalog = [{"id": 1, "name": "Signs "}, {"id": 2, "name": "Signs on a pole"}]
+        self.assertEqual(paloalto311.find_type(catalog, "Signs")["id"], 1)
+        traffic = paloalto311.find_type(paloalto311.load_catalog(), "Traffic Signs Damaged or Obstructed")
+        self.assertEqual(traffic["id"], 15503)
+
+    def test_drought_multiselect_is_sent_as_a_json_list(self):
+        self.geocode_network.side_effect = self.geocode_only
+        preview = self.prepare(
+            type="Drought/Water Waste",
+            description="Irrigation is running into the street.",
+            field=[("3238", "Residential"), ("3720", "Leak, Irrigation Runoff, Leak")],
+        )
+        self.assertEqual(preview["custom_fields"]["3720"], ["Leak", "Irrigation Runoff"])
+        self.assertEqual(preview["custom_fields"]["3238"], "Residential")
+        self.assertEqual(preview["custom_fields"]["3609"], ADDRESS)
+        self.assertEqual(preview["custom_fields"]["3259"], CORNER)
+        self.assertEqual(preview["missing_fields"], [])
+        self.assertFalse(preview["public"])
+        self.sign_in()
+        self.network.reset_mock()
+        self.network.side_effect = self.city_api
+        with contextlib.redirect_stdout(io.StringIO()):
+            paloalto311.command_submit(argparse.Namespace(preview=None, confirm=True))
+        values = form_values(self.submitted)
+        self.assertEqual(values["request_type_id"], "1001495")
+        self.assertEqual(json.loads(values["custom_field_3720"]), ["Leak", "Irrigation Runoff"])
+        self.assertEqual(json.loads(values["custom_field_3238"]), "Residential")
+
+    def test_multiselect_rejects_an_unknown_option(self):
+        self.geocode_network.side_effect = self.geocode_only
+        message = self.exit_message(
+            lambda: self.prepare(
+                type="Drought/Water Waste",
+                description="Irrigation is running into the street.",
+                field=[("3238", "Residential"), ("3720", "Leak, Not a violation")],
+            )
+        )
+        self.assertIn("Violation Type must be one of:", message)
+        for call in self.network.call_args_list:
+            target = getattr(call.args[0], "full_url", call.args[0])
+            self.assertNotIn("publicstuff.com", target)
+
     def test_heic_without_sips_asks_for_a_jpeg(self):
         for error in (FileNotFoundError(), subprocess.CalledProcessError(1, "sips")):
             with self.subTest(error=type(error).__name__):

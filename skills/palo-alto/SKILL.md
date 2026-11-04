@@ -45,7 +45,7 @@ A photo outside Palo Alto is refused.
 
 ## Other request types
 
-`show` prints required fields, option names, and which fields are staff-only. The photo fills Cross Street, Intersection, Light Location Address, Location Address of Lid/Cover, and Address or Location for Request. Pass every other answer as `--field ID=value`, using the id from `show`. Option fields take the option name, such as `Out` or `No`. `prepare` lists anything still missing. `submit` refuses until those are filled. Name and phone are filled from the account file when the field is named `Name`, `Contact Name`, or `Phone Number`.
+`show` prints required fields, option names, and which fields are staff-only. The photo fills Cross Street, Intersection, Light Location Address, Location Address of Lid/Cover, and Address or Location for Request. Pass every other answer as `--field ID=value`, using the id from `show`. A single-choice field takes the option name, such as `Out` or `No`. A multiselect field takes those names separated by commas, such as `Leak, Irrigation Runoff`, and the script sends them as a list. `prepare` lists anything still missing. `submit` refuses until those are filled. Name and phone are filled from the account file when the field is named `Name`, `Contact Name`, or `Phone Number`.
 
 Do not put the phone number in the public description. Do not send `is_private`. Residents cannot mark a Palo Alto request private. Do not invent a pole number.
 

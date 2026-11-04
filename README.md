@@ -44,6 +44,8 @@ The city form means picking a category, typing the address, and filling the fiel
 
 A photo outside Palo Alto is refused. Another city will be a new folder under `skills/`.
 
+[docs/catalog.md](docs/catalog.md) lists every Palo Alto request type and records each photo run.
+
 A JPEG works on any computer. The Python script reads its location. A HEIC photo needs a Mac: Swift reads the location, and `sips` converts it for upload. The Swift file is `skills/file-311-common/photo-gps.swift`. The compiled binary is not part of this repo. On Linux or Windows, export the photo as a JPEG.
 
 ## One-time setup

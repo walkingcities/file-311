@@ -1,6 +1,6 @@
 # Palo Alto 311 catalog
 
-Every request type in [`skills/palo-alto/catalog.json`](../skills/palo-alto/catalog.json). A checkmark means a camera photo was prepared or submitted in chat, and the transcript is under [Example runs](#example-runs).
+Every request type in [`skills/palo-alto/catalog.json`](../skills/palo-alto/catalog.json). A checkmark in the Run column links to that photo run in [`runs.md`](runs.md).
 
 Street Light Out is also covered offline by [`tests/test_street_light.py`](../tests/test_street_light.py). That test uses a stand-in photo and does not call the city, so its row stays open until a camera-photo run is recorded here.
 
@@ -37,7 +37,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 25018 | [Debris in Roadway](#debris-in-roadway) |
 |  | 15506 | [Flooding](#flooding) |
 |  | 1019168 | [Other Park Maintenance](#other-park-maintenance) |
-| [✅](#fallen-sign-november-3-2026) | 15503 | [Traffic Signs Damaged or Obstructed](#traffic-signs-damaged-or-obstructed) |
+| [✅](runs.md#fallen-sign-november-3-2026) | 15503 | [Traffic Signs Damaged or Obstructed](#traffic-signs-damaged-or-obstructed) |
 |  | 15510 | [Street Resurfacing](#street-resurfacing) |
 |  | 1016998 | [Signs (Private Property)](#signs-private-property) |
 |  | 32778 | [New traffic signs and/or pavement markings](#new-traffic-signs-andor-pavement-markings) |
@@ -92,30 +92,6 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 1020059 | [Vehicle Parking Violation - In the Roadway/Sidewalk](#vehicle-parking-violation-in-the-roadwaysidewalk) |
 |  | 15499 | [Missed Street Sweeping Route](#missed-street-sweeping-route) |
 |  | 1016994 | [Public Right of Way Obstructions/Encroachment](#public-right-of-way-obstructionsencroachment) |
-
-## Example runs
-
-### Fallen sign, November 3, 2026
-
-Submitted on November 3, 2026. PaloAlto311 request [18864090](https://iframe.publicstuff.com/#?client_id=406&request_id=18864090).
-
-The photo is a green bike-lane wayfinding sign lying on the dirt shoulder, post down, beside a road with a railroad crossing and a 10 mph curve sign. The original camera file is `992FBCAD-1F89-4139-83A4-A89A9630121B_1_105_c-4832a9e1-6c3c-4b5d-a20f-bd006fd58e33.jpg`.
-
-**Christopher:** Dry run; do not submit. Report this sign to Palo Alto 311 that fell down. See attached photo.
-
-**Assistant:** Dry run only. Nothing was submitted.
-
-- Request type: Traffic Signs Damaged or Obstructed
-- Address: 67 Palo Alto Ave, Palo Alto, CA 94301
-- Cross street: Alma St & Palo Alto Ave
-- Description: A green bike-lane wayfinding sign has fallen and is lying on the dirt shoulder beside the road. The post is down.
-- Intersection (staff-only): Alma St & Palo Alto Ave
-
-The photo and the location are public. This request type has no name or phone field. The intersection is the only staff-only field.
-
-**Christopher:** Can you actually submit the 311 request, and if successful, update the example runs section?
-
-**Assistant:** Submitted to PaloAlto311. Request 18864090. https://iframe.publicstuff.com/#?client_id=406&request_id=18864090
 
 ## Types
 
@@ -277,7 +253,7 @@ Id 1019168. This report is public. An address is required.
 
 ### Traffic Signs Damaged or Obstructed
 
-Example run recorded. See [Fallen sign, November 3, 2026](#fallen-sign-november-3-2026).
+Example run recorded. See [Fallen sign, November 3, 2026](runs.md#fallen-sign-november-3-2026).
 
 Report missing, bent and unreadable traffic signs.
 

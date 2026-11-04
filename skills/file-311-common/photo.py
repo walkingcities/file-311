@@ -35,7 +35,10 @@ def swift_gps(path):
     swift = shutil.which("swift")
     if not swift or not SWIFT_GPS.is_file():
         die("This HEIC photo needs Swift to read its location. Export it as a JPEG, or install the Swift tools.")
-    result = subprocess.run([swift, str(SWIFT_GPS), path], text=True, capture_output=True)
+    try:
+        result = subprocess.run([swift, str(SWIFT_GPS), path], text=True, capture_output=True, timeout=30)
+    except subprocess.TimeoutExpired:
+        die("Reading this HEIC photo took too long. Export it as a JPEG and use that file.")
     if result.returncode != 0:
         die(result.stderr.strip() or "This photo has no location.")
     try:
@@ -156,9 +159,12 @@ def jpeg_for_upload(path, directory):
             ["sips", "-s", "format", "jpeg", path, "--out", str(destination)],
             check=True,
             capture_output=True,
+            timeout=30,
         )
     except FileNotFoundError:
         die("This HEIC photo needs the macOS sips tool to become a JPEG. Export it as a JPEG and use that file.")
+    except subprocess.TimeoutExpired:
+        die("Converting this HEIC photo took too long. Export it as a JPEG and use that file.")
     except subprocess.CalledProcessError:
         die("Could not convert this HEIC photo to JPEG. Export it as a JPEG and use that file.")
     return str(destination)

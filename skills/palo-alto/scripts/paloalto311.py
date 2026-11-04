@@ -5,6 +5,7 @@ import argparse
 import json
 import mimetypes
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -49,7 +50,30 @@ def die(message, code=1):
 
 
 def load_catalog():
-    return json.loads(CATALOG_PATH.read_text())
+    catalog = json.loads(CATALOG_PATH.read_text())
+    for item in catalog:
+        item["name"] = item["name"].strip()
+        for field in item["fields"]:
+            field["name"] = field["name"].strip()
+    return catalog
+
+
+def name_tokens(text):
+    return re.findall(r"[a-z0-9]+", text.lower())
+
+
+def singular(token):
+    if len(token) > 3 and token.endswith("s"):
+        return token[:-1]
+    return token
+
+
+def tokens_match(query, name):
+    needles = name_tokens(query)
+    hay = {singular(token) for token in name_tokens(name)}
+    if not needles:
+        return False
+    return all(singular(needle) in hay for needle in needles)
 
 
 def find_type(catalog, query):
@@ -59,7 +83,7 @@ def find_type(catalog, query):
     else:
         needle = query.lower()
         exact = [item for item in catalog if item["name"].strip().lower() == needle]
-        matches = exact or [item for item in catalog if needle in item["name"].strip().lower()]
+        matches = exact or [item for item in catalog if tokens_match(query, item["name"])]
     if not matches:
         die(f"No Palo Alto 311 request type matches {query!r}. Run: paloalto311.py list")
     if len(matches) > 1:
@@ -100,7 +124,10 @@ def api_request(path, fields, photo=None):
         body = error.read().decode()
     if not body.strip():
         die("PaloAlto311 returned an empty response.")
-    payload = json.loads(body)
+    try:
+        payload = json.loads(body)
+    except json.JSONDecodeError:
+        die("PaloAlto311 returned a response that was not JSON.")
     status = payload.get("response", {}).get("status", {})
     if status.get("code") != 200:
         die(status.get("message") or body)
@@ -166,6 +193,8 @@ def build_custom_fields(request_type, values, account):
             raw = account.get("name")
         if raw is None and field["name"] == "Phone Number" and account:
             raw = account.get("phone")
+        if raw is None and field["name"] == "Preferred Method of First Contact" and account:
+            raw = preferred_contact(field, account)
         if field["required"] and blank_field(raw):
             missing.append(field)
             continue
@@ -177,6 +206,34 @@ def build_custom_fields(request_type, values, account):
             die(f"{field['name'].strip()} must be one of: {', '.join(field['options'])}")
         custom[str(field["id"])] = raw
     return custom, missing
+
+
+def preferred_contact(field, account):
+    email_option = "Email (registered user email)"
+    phone_option = "Phone (please provide phone number)"
+    if account.get("email") and email_option in field["options"]:
+        return email_option
+    if account.get("phone") and phone_option in field["options"]:
+        return phone_option
+    return None
+
+
+def type_caution(request_type):
+    name = request_type["name"].strip()
+    description = (request_type.get("description") or "").replace("\r\n", "\n").strip()
+    if name == "Unhoused Outreach-Connection to services":
+        return (
+            "This files a public report with the photo's GPS. "
+            "Use it only when the person asked for outreach, not because a photo shows a person."
+        )
+    if name == "Fire Code Violations":
+        return (
+            "File this only when the person asked for a fire-code report. "
+            "An emergency is a 911 call, not a 311 report.\n" + description
+        )
+    if "911" in description or "Police Department" in description:
+        return description
+    return ""
 
 
 def blank_field(raw):
@@ -204,9 +261,9 @@ def multiselect_values(field, raw):
 
 
 def command_list(args):
-    needle = (args.query or "").strip().lower()
+    needle = (args.query or "").strip()
     for item in load_catalog():
-        if needle and needle not in item["name"].strip().lower():
+        if needle and not tokens_match(needle, item["name"]):
             continue
         print(f"{item['id']}\t{item['name'].strip()}")
 
@@ -237,10 +294,7 @@ def command_prepare(args):
     photo = str(Path(args.photo).expanduser().resolve())
     if not Path(photo).is_file():
         die(f"Photo not found: {photo}")
-    if args.lat is not None and args.lon is not None:
-        lat, lon = args.lat, args.lon
-    else:
-        lat, lon = photo_location(photo)
+    lat, lon = photo_location(photo)
     place = reverse_geocode(lat, lon, "Palo Alto")
     if args.cross:
         place["cross_street"] = args.cross
@@ -262,6 +316,8 @@ def command_prepare(args):
     preview = {
         "type_id": request_type["id"],
         "type_name": request_type["name"],
+        "type_description": (request_type.get("description") or "").replace("\r\n", "\n").strip(),
+        "caution": type_caution(request_type),
         "title": request_type["name"],
         "description": description or "",
         "latitude": lat,
@@ -295,6 +351,15 @@ def command_submit(args):
     account = load_account()
     if not account or not account.get("api_key"):
         die(f"Not signed in. Ask for PaloAlto311 email, password, name, and phone, then run login. Account file: {ACCOUNT_PATH}")
+    photo = preview.get("photo")
+    if photo and not Path(photo).expanduser().is_file():
+        die(f"Photo not found: {photo}. Run prepare again.")
+    try:
+        lat = float(preview["latitude"])
+        lon = float(preview["longitude"])
+    except (KeyError, TypeError, ValueError):
+        die("This preview has no location. Run prepare again.")
+    reverse_geocode(lat, lon, "Palo Alto")
     request_type = find_type(load_catalog(), str(preview["type_id"]))
     values = dict(preview.get("custom_fields") or {})
     fill_location_fields(
@@ -366,8 +431,6 @@ def main():
     prepare_parser.add_argument("--cross")
     prepare_parser.add_argument("--condition", default="Out")
     prepare_parser.add_argument("--damage", default="No")
-    prepare_parser.add_argument("--lat", type=float)
-    prepare_parser.add_argument("--lon", type=float)
     prepare_parser.add_argument("--field", action="append", type=parse_field)
     prepare_parser.set_defaults(func=command_prepare)
 

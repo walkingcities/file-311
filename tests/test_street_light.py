@@ -138,8 +138,11 @@ class StreetLightTests(unittest.TestCase):
         return FakeResponse(json.dumps(body))
 
     def city_api(self, url, *args, **kwargs):
+        target = getattr(url, "full_url", url)
+        if "geocode.arcgis.com" in target:
+            return self.geocode_only(url, *args, **kwargs)
         self.assertIsInstance(url, urllib.request.Request)
-        if "geocode.arcgis.com" in url.full_url or "publicstuff.com" not in url.full_url:
+        if "publicstuff.com" not in target:
             raise AssertionError(f"unexpected call: {url.full_url}")
         self.submitted = url
         if url.full_url.endswith("/api/2.1/user_login"):
@@ -170,8 +173,6 @@ class StreetLightTests(unittest.TestCase):
             cross=kwargs.get("cross"),
             condition=kwargs.get("condition", "Out"),
             damage=kwargs.get("damage", "No"),
-            lat=kwargs.get("lat"),
-            lon=kwargs.get("lon"),
             field=kwargs.get("field"),
         )
         with contextlib.redirect_stdout(io.StringIO()):
@@ -206,6 +207,8 @@ class StreetLightTests(unittest.TestCase):
         self.assertEqual(preview["custom_fields"]["3257"], "Out")
         self.assertEqual(preview["custom_fields"]["3263"], "No")
         self.assertEqual([field["name"] for field in preview["missing_fields"]], ["Name", "Phone Number"])
+        self.assertIn("5 business days", preview["type_description"])
+        self.assertEqual(preview["caution"], "")
         self.assertTrue(preview["public"])
         self.assertEqual(stat.S_IMODE(self.preview_path.stat().st_mode), 0o600)
         for call in self.geocode_network.call_args_list:
@@ -245,7 +248,14 @@ class StreetLightTests(unittest.TestCase):
         output = io.StringIO()
         with contextlib.redirect_stdout(output):
             paloalto311.command_submit(argparse.Namespace(preview=None, confirm=True))
-        self.network.assert_called_once()
+        city_calls = [
+            call for call in self.network.call_args_list
+            if "publicstuff.com" in getattr(call.args[0], "full_url", call.args[0])
+        ]
+        self.assertEqual(len(city_calls), 1)
+        self.assertTrue(
+            any("geocode.arcgis.com" in getattr(call.args[0], "full_url", call.args[0]) for call in self.network.call_args_list)
+        )
         request = self.submitted
         self.assertEqual(request.full_url, CITY_URL)
         values = form_values(request)
@@ -289,7 +299,10 @@ class StreetLightTests(unittest.TestCase):
             lambda: paloalto311.command_submit(argparse.Namespace(preview=None, confirm=True))
         )
         self.assertIn("Still missing: Name, Phone Number", message)
-        self.network.assert_not_called()
+        for call in self.network.call_args_list:
+            target = getattr(call.args[0], "full_url", call.args[0])
+            self.assertNotIn("publicstuff.com", target)
+            self.assertIn("geocode.arcgis.com", target)
 
     def test_login_does_not_save_the_password(self):
         self.network.side_effect = self.city_api
@@ -317,7 +330,7 @@ class StreetLightTests(unittest.TestCase):
         self.assertEqual(preview["missing_fields"], [])
 
     def test_heic_photos_are_converted_to_separate_files(self):
-        def fake_sips(cmd, check, capture_output):
+        def fake_sips(cmd, check, capture_output, timeout):
             Path(cmd[cmd.index("--out") + 1]).write_bytes(b"jpeg")
 
         with patch("photo.subprocess.run", fake_sips):
@@ -370,8 +383,107 @@ class StreetLightTests(unittest.TestCase):
             target = getattr(call.args[0], "full_url", call.args[0])
             self.assertNotIn("publicstuff.com", target)
 
+    def test_tree_matches_tree_types_and_not_street(self):
+        catalog = paloalto311.load_catalog()
+        message = self.exit_message(lambda: paloalto311.find_type(catalog, "tree"))
+        self.assertIn("Tree Care Request", message)
+        self.assertIn("Tree or Limb Down", message)
+        self.assertNotIn("Street", message)
+        output = io.StringIO()
+        with contextlib.redirect_stdout(output):
+            paloalto311.command_list(argparse.Namespace(query="street"))
+        text = output.getvalue()
+        self.assertIn("Street Light Out", text)
+        self.assertNotIn("Tree Care Request", text)
+
+    def test_preview_includes_a_caution_for_911_and_outreach_types(self):
+        self.geocode_network.side_effect = self.geocode_only
+        hazardous = self.prepare(type="Hazardous Materials", description="A container is leaking beside the road.")
+        self.assertIn("911", hazardous["type_description"])
+        self.assertIn("911", hazardous["caution"])
+        outreach = self.prepare(
+            type="Unhoused Outreach-Connection to services",
+            description="Someone may need outreach.",
+        )
+        self.assertIn("public report", outreach["caution"])
+        self.assertIn("asked for outreach", outreach["caution"])
+
+    def test_preferred_contact_defaults_to_the_account_email(self):
+        self.geocode_network.side_effect = self.geocode_only
+        self.sign_in()
+        preview = self.prepare(type="Zoning & Land Use", description="A business is operating without a permit.")
+        self.assertEqual(preview["custom_fields"]["3910"], "Email (registered user email)")
+        self.assertEqual(preview["custom_fields"]["3608"], "Ada Resident")
+        self.assertIn(
+            "Additional Location Description for Request",
+            [field["name"] for field in preview["missing_fields"]],
+        )
+
+    def test_submit_refuses_a_pin_outside_palo_alto(self):
+        self.geocode_network.side_effect = self.geocode_only
+        self.prepare()
+        self.sign_in()
+
+        def elsewhere(url, *args, **kwargs):
+            target = getattr(url, "full_url", url)
+            if "publicstuff.com" in target:
+                raise AssertionError(target)
+            return FakeResponse(json.dumps({"address": {"City": "Menlo Park", "Address": "1 El Camino Real"}}))
+
+        self.network.reset_mock()
+        self.network.side_effect = elsewhere
+        message = self.exit_message(
+            lambda: paloalto311.command_submit(argparse.Namespace(preview=None, confirm=True))
+        )
+        self.assertIn("This photo is in Menlo Park.", message)
+
+    def test_submit_refuses_a_missing_photo(self):
+        self.geocode_network.side_effect = self.geocode_only
+        self.prepare()
+        self.sign_in()
+        self.photo.unlink()
+        self.network.reset_mock()
+        self.network.side_effect = self.city_api
+        message = self.exit_message(
+            lambda: paloalto311.command_submit(argparse.Namespace(preview=None, confirm=True))
+        )
+        self.assertIn("Run prepare again.", message)
+        self.network.assert_not_called()
+
+    def test_cross_street_in_another_city_is_left_blank(self):
+        def elsewhere_corner(url, *args, **kwargs):
+            target = getattr(url, "full_url", url)
+            if "publicstuff.com" in target:
+                raise AssertionError(target)
+            if "StreetInt" in target:
+                body = {"address": {"ShortLabel": "Ravenswood Ave & El Camino Real", "City": "Menlo Park"}}
+            else:
+                body = {
+                    "address": {
+                        "City": "Palo Alto",
+                        "Address": "450 Alma St",
+                        "RegionAbbr": "CA",
+                        "Postal": "94301",
+                    }
+                }
+            return FakeResponse(json.dumps(body))
+
+        self.geocode_network.side_effect = elsewhere_corner
+        preview = self.prepare()
+        self.assertEqual(preview["cross_street"], "")
+        self.assertIn("Cross Street", [field["name"] for field in preview["missing_fields"]])
+
+    def test_geocoder_failure_names_the_reason(self):
+        def boom(url, *args, **kwargs):
+            raise urllib.error.URLError("Tunnel connection failed: 403 Forbidden")
+
+        self.network.side_effect = boom
+        message = self.exit_message(self.prepare)
+        self.assertIn("403 Forbidden", message)
+        self.assertIn("Could not find that place.", message)
+
     def test_heic_without_sips_asks_for_a_jpeg(self):
-        for error in (FileNotFoundError(), subprocess.CalledProcessError(1, "sips")):
+        for error in (FileNotFoundError(), subprocess.CalledProcessError(1, "sips"), subprocess.TimeoutExpired("sips", 30)):
             with self.subTest(error=type(error).__name__):
                 with patch("photo.subprocess.run", side_effect=error):
                     message = self.exit_message(

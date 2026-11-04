@@ -5,8 +5,6 @@ import argparse
 import json
 import mimetypes
 import os
-import shutil
-import subprocess
 import sys
 import urllib.error
 import urllib.parse
@@ -14,16 +12,33 @@ import urllib.request
 import uuid
 from pathlib import Path
 
+COMMON = Path(__file__).resolve().parents[2] / "file-311-common"
+if str(COMMON) not in sys.path:
+    sys.path.insert(0, str(COMMON))
+try:
+    from geocode import reverse_geocode
+    from photo import jpeg_for_upload, photo_location
+except ModuleNotFoundError:
+    print(
+        "Missing file-311-common. Install it beside this skill, or copy skills/file-311-common into the same skills directory.",
+        file=sys.stderr,
+    )
+    raise SystemExit(1)
+
 CLIENT_ID = "406"
 SPACE_ID = "26742"
 API = "https://vc0.publicstuff.com"
-GEOCODE = "https://geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer/reverseGeocode"
 ROOT = Path(__file__).resolve().parent.parent
 CATALOG_PATH = ROOT / "catalog.json"
 ACCOUNT_PATH = Path.home() / ".config" / "paloalto311" / "account.json"
 PREVIEW_PATH = Path.home() / ".config" / "paloalto311" / "preview.json"
-SWIFT_GPS = Path(__file__).resolve().parent / "photo-gps.swift"
 STREET_LIGHT_ID = 32794
+ADDRESS_FIELDS = {
+    "Light Location Address",
+    "Location Address of Lid/Cover",
+    "Address or Location for Request",
+}
+CORNER_FIELDS = {"Cross Street", "Intersection"}
 
 sys.stdout.reconfigure(line_buffering=True)
 
@@ -116,173 +131,21 @@ def encode_form(fields, photo):
     return b"".join(chunks), f"multipart/form-data; boundary={boundary}"
 
 
-def photo_location(path):
-    suffix = Path(path).suffix.lower()
-    if suffix in {".jpg", ".jpeg"}:
-        return jpeg_gps(path)
-    if suffix in {".heic", ".heif"}:
-        return swift_gps(path)
-    die("This photo has no location.")
-
-
-def jpeg_gps(path):
-    tiff = exif_tiff(Path(path).read_bytes())
-    coords = tiff_gps(tiff) if tiff else None
-    if coords is None:
-        die("This photo has no location.")
-    return coords
-
-
-def swift_gps(path):
-    swift = shutil.which("swift")
-    if not swift or not SWIFT_GPS.is_file():
-        die("This HEIC photo needs Swift to read its location. Export it as a JPEG, or install the Swift tools.")
-    result = subprocess.run([swift, str(SWIFT_GPS), path], text=True, capture_output=True)
-    if result.returncode != 0:
-        die(result.stderr.strip() or "This photo has no location.")
-    try:
-        lat, lon = result.stdout.split()
-        return float(lat), float(lon)
-    except ValueError:
-        die(result.stderr.strip() or "This photo has no location.")
-
-
-def exif_tiff(data):
-    if len(data) < 4 or data[:2] != b"\xff\xd8":
-        return None
-    offset = 2
-    while offset + 4 <= len(data):
-        if data[offset] != 0xFF:
-            return None
-        marker = data[offset + 1]
-        if marker == 0xDA:
-            return None
-        if marker in (0xD8, 0xD9) or 0xD0 <= marker <= 0xD7:
-            offset += 2
+def fill_location_fields(request_type, values, address, cross_street, overwrite=False):
+    for field in request_type["fields"]:
+        if field["type"] == "display":
             continue
-        length = int.from_bytes(data[offset + 2 : offset + 4], "big")
-        if length < 2 or offset + 2 + length > len(data):
-            return None
-        if marker == 0xE1:
-            payload = data[offset + 4 : offset + 2 + length]
-            if payload.startswith(b"Exif\x00\x00"):
-                return payload[6:]
-        offset += 2 + length
-    return None
-
-
-def tiff_gps(tiff):
-    if len(tiff) < 8 or tiff[:2] not in (b"II", b"MM"):
-        return None
-    endian = "little" if tiff[:2] == b"II" else "big"
-
-    def u16(off):
-        return int.from_bytes(tiff[off : off + 2], endian)
-
-    def u32(off):
-        return int.from_bytes(tiff[off : off + 4], endian)
-
-    if u16(2) != 42:
-        return None
-    entries = ifd_entries(tiff, u32(4), u16)
-    gps_entry = entries.get(0x8825)
-    if not gps_entry or gps_entry[0] != 4 or gps_entry[1] != 1:
-        return None
-    gps = ifd_entries(tiff, u32(gps_entry[2]), u16)
-    lat = gps_degrees(tiff, gps.get(2), gps.get(1), endian)
-    lon = gps_degrees(tiff, gps.get(4), gps.get(3), endian)
-    if lat is None or lon is None:
-        return None
-    return lat, lon
-
-
-def ifd_entries(tiff, offset, u16):
-    if offset < 0 or offset + 2 > len(tiff):
-        return {}
-    count = u16(offset)
-    entries = {}
-    for index in range(count):
-        base = offset + 2 + index * 12
-        if base + 12 > len(tiff):
-            break
-        tag = u16(base)
-        typ = u16(base + 2)
-        number = int.from_bytes(tiff[base + 4 : base + 8], "little" if tiff[:2] == b"II" else "big")
-        entries[tag] = (typ, number, base + 8)
-    return entries
-
-
-def component_size(typ):
-    return {1: 1, 2: 1, 3: 2, 4: 4, 5: 8, 7: 1, 9: 4, 10: 8}.get(typ, 0)
-
-
-def entry_offset(tiff, entry, endian):
-    typ, count, value_at = entry
-    size = component_size(typ) * count
-    if size <= 4:
-        return value_at
-    return int.from_bytes(tiff[value_at : value_at + 4], endian)
-
-
-def gps_degrees(tiff, rationals, ref, endian):
-    if not rationals or rationals[0] != 5 or rationals[1] < 3:
-        return None
-    start = entry_offset(tiff, rationals, endian)
-    if start < 0 or start + 24 > len(tiff):
-        return None
-    parts = []
-    for index in range(3):
-        base = start + index * 8
-        num = int.from_bytes(tiff[base : base + 4], endian)
-        den = int.from_bytes(tiff[base + 4 : base + 8], endian)
-        parts.append(num / den if den else 0)
-    degrees = parts[0] + parts[1] / 60 + parts[2] / 3600
-    if ref:
-        letter = tiff[entry_offset(tiff, ref, endian) : entry_offset(tiff, ref, endian) + 1]
-        if letter in (b"S", b"W"):
-            degrees = -degrees
-    return degrees
-
-
-def geocode(lat, lon):
-    url = f"{GEOCODE}?f=json&location={lon},{lat}"
-    with urllib.request.urlopen(url, timeout=30) as response:
-        payload = json.loads(response.read().decode())
-    address = payload.get("address") or {}
-    city = address.get("City") or ""
-    if not city:
-        die("Could not find that place. Check that the machine is online and try the photo again.")
-    if city != "Palo Alto":
-        die(f"This photo is in {city}. Palo Alto 311 reports are only for inside the city.")
-    street = address.get("Address") or ""
-    state = address.get("RegionAbbr") or "CA"
-    postal = address.get("Postal") or ""
-    formatted = ", ".join(part for part in [street, city, f"{state} {postal}".strip()] if part)
-    cross = ""
-    cross_url = f"{GEOCODE}?f=json&featureTypes=StreetInt&location={lon},{lat}"
-    try:
-        with urllib.request.urlopen(cross_url, timeout=30) as response:
-            cross_payload = json.loads(response.read().decode())
-        cross = (cross_payload.get("address") or {}).get("ShortLabel") or ""
-    except urllib.error.URLError:
-        cross = ""
-    return {"address": formatted, "city": city, "zipcode": postal, "cross_street": cross}
-
-
-def jpeg_for_upload(path):
-    suffix = Path(path).suffix.lower()
-    if suffix in {".jpg", ".jpeg", ".png", ".gif", ".tif", ".tiff", ".bmp", ".webp"}:
-        return path
-    if suffix not in {".heic", ".heif"}:
-        die(f"PaloAlto311 does not accept {suffix or 'that'} photos. Use a JPEG or HEIC photo.")
-    destination = PREVIEW_PATH.parent / "street-light.jpg"
-    destination.parent.mkdir(parents=True, exist_ok=True)
-    subprocess.run(
-        ["sips", "-s", "format", "jpeg", path, "--out", str(destination)],
-        check=True,
-        capture_output=True,
-    )
-    return str(destination)
+        if field["name"] in ADDRESS_FIELDS:
+            chosen = address
+        elif field["name"] in CORNER_FIELDS:
+            chosen = cross_street
+        else:
+            continue
+        if not chosen:
+            continue
+        key = str(field["id"])
+        if overwrite or key not in values or str(values.get(key, "")).strip() == "":
+            values[key] = chosen
 
 
 def field_by_name(request_type, name):
@@ -352,20 +215,15 @@ def command_prepare(args):
         lat, lon = args.lat, args.lon
     else:
         lat, lon = photo_location(photo)
-    place = geocode(lat, lon)
+    place = reverse_geocode(lat, lon, "Palo Alto")
     if args.cross:
         place["cross_street"] = args.cross
     account = load_account()
     values = dict(args.field or [])
+    fill_location_fields(request_type, values, place["address"], place["cross_street"])
     if request_type["id"] == STREET_LIGHT_ID:
-        address_field = field_by_name(request_type, "Light Location Address")
-        cross_field = field_by_name(request_type, "Cross Street")
         condition_field = field_by_name(request_type, "Condition of Light")
         damage_field = field_by_name(request_type, "Is there damage to the light?")
-        if address_field:
-            values.setdefault(str(address_field["id"]), place["address"])
-        if cross_field and place["cross_street"]:
-            values.setdefault(str(cross_field["id"]), place["cross_street"])
         if condition_field:
             values.setdefault(str(condition_field["id"]), args.condition)
         if damage_field:
@@ -374,7 +232,7 @@ def command_prepare(args):
     if description is None and request_type["id"] == STREET_LIGHT_ID:
         description = "Street light is out."
     custom, missing = build_custom_fields(request_type, values, account)
-    upload = jpeg_for_upload(photo)
+    upload = jpeg_for_upload(photo, PREVIEW_PATH.parent)
     preview = {
         "type_id": request_type["id"],
         "type_name": request_type["name"],
@@ -412,17 +270,18 @@ def command_submit(args):
     if not account or not account.get("api_key"):
         die(f"Not signed in. Ask for PaloAlto311 email, password, name, and phone, then run login. Account file: {ACCOUNT_PATH}")
     request_type = find_type(load_catalog(), str(preview["type_id"]))
-    custom, missing = build_custom_fields(request_type, preview.get("custom_fields") or {}, account)
+    values = dict(preview.get("custom_fields") or {})
+    fill_location_fields(
+        request_type,
+        values,
+        preview.get("address") or "",
+        preview.get("cross_street") or "",
+        overwrite=True,
+    )
+    custom, missing = build_custom_fields(request_type, values, account)
     if missing:
         names = ", ".join(field["name"] for field in missing)
         die(f"Still missing: {names}")
-    if request_type["id"] == STREET_LIGHT_ID and preview.get("cross_street"):
-        cross_field = field_by_name(request_type, "Cross Street")
-        address_field = field_by_name(request_type, "Light Location Address")
-        if cross_field:
-            custom[str(cross_field["id"])] = preview["cross_street"]
-        if address_field:
-            custom[str(address_field["id"])] = preview["address"]
     fields = {
         "title": preview.get("title") or request_type["name"],
         "description": preview.get("description") or "",

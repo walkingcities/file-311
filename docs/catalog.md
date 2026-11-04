@@ -97,7 +97,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 
 ### Fallen sign, November 3, 2026
 
-Prepared on November 3, 2026. Not submitted. The transcript below is the dry-run chat.
+Submitted on November 3, 2026. PaloAlto311 request [18864090](https://iframe.publicstuff.com/#?client_id=406&request_id=18864090).
 
 The photo is a green bike-lane wayfinding sign lying on the dirt shoulder, post down, beside a road with a railroad crossing and a 10 mph curve sign. The original camera file is `992FBCAD-1F89-4139-83A4-A89A9630121B_1_105_c-4832a9e1-6c3c-4b5d-a20f-bd006fd58e33.jpg`.
 
@@ -111,7 +111,11 @@ The photo is a green bike-lane wayfinding sign lying on the dirt shoulder, post 
 - Description: A green bike-lane wayfinding sign has fallen and is lying on the dirt shoulder beside the road. The post is down.
 - Intersection (staff-only): Alma St & Palo Alto Ave
 
-The photo and the location would be public. This request type has no name or phone field. The intersection is the only staff-only field.
+The photo and the location are public. This request type has no name or phone field. The intersection is the only staff-only field.
+
+**Christopher:** Can you actually submit the 311 request, and if successful, update the example runs section?
+
+**Assistant:** Submitted to PaloAlto311. Request 18864090. https://iframe.publicstuff.com/#?client_id=406&request_id=18864090
 
 ## Types
 

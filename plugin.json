@@ -1,0 +1,11 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "file-311",
+  "version": "1.0.0",
+  "description": "File a city 311 report from a photo.",
+  "author": {
+    "name": "Christopher Kao"
+  },
+  "license": "MIT",
+  "repository": "https://github.com/walkingcities/file-311"
+}

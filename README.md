@@ -2,7 +2,7 @@
 
 File a city 311 report from a photo.
 
-This repo has one city today: Palo Alto. Install the skill once, drop a photo into Cursor, Claude Code, or Codex, and say what is wrong. The agent prepares the report. Nothing is sent until you agree.
+This repo has one city today: Palo Alto. Install it once, drop a photo into Cursor or Claude Code, and say what is wrong. The agent prepares the report. Nothing is sent until you agree.
 
 This is an unofficial client of the city's PaloAlto311 site. It only files reports inside Palo Alto.
 
@@ -10,7 +10,25 @@ Other places are listed in [docs/jurisdictions.md](docs/jurisdictions.md), with 
 
 ## Install
 
-Global install is the default. Someone filing a street light is not inside a project repo.
+Install the `file-311` plugin from the marketplace. That is the preferred install in Cursor and Claude Code. The plugin installs Palo Alto and `file-311-common` together. The city script imports that library from the folder beside it.
+
+The marketplace listings are not approved yet. Until they are, [install the skills directly](#install-the-skills-directly).
+
+### Cursor
+
+1. Open Customize in the sidebar.
+2. Search the Marketplace for `file-311`.
+3. Choose Install, and install it for your user. A street-light report is not tied to one project.
+
+### Claude Code
+
+1. Start Claude Code and run `/plugin`.
+2. On the Discover tab, search for `file-311`.
+3. Choose Install for you.
+
+### Install the skills directly
+
+Use this until the marketplace listings are approved. Global install is the default. Someone filing a street light is not inside a project repo.
 
 You need Node 22.20 or newer. `npx` downloads and runs an npm package. `skills` is the [Vercel skills CLI](https://github.com/vercel-labs/skills), a separate tool from this repo. `@latest` means the newest published version of that CLI. The CLI then downloads `walkingcities/file-311` from GitHub and installs every skill in the repo: the shared library and each city. This does not install an npm package named file-311.
 
@@ -26,9 +44,7 @@ To install only Palo Alto, name both the city skill and the library it imports:
 npx skills@latest add walkingcities/file-311 --skill palo-alto --skill file-311-common -g -a cursor -a claude-code -a codex -y
 ```
 
-### Copy the folders yourself
-
-Node is an extra requirement for a Python script. Copy `skills/file-311-common/` and `skills/palo-alto/` into the same skills directory:
+Copy the folders yourself when Node is an extra requirement for a Python script. Copy `skills/file-311-common/` and `skills/palo-alto/` into the same skills directory:
 
 - Cursor: `~/.cursor/skills/`
 - Claude Code: `~/.claude/skills/`

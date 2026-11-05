@@ -2,6 +2,8 @@
 
 Palo Alto is the only place this repo files. A photo outside Palo Alto is refused. Another jurisdiction is a new folder under `skills/`, using the same photo, GPS, and preview-before-send flow. Nothing below is built.
 
+Palo Alto's request-type list and photo runs are `docs/palo-alto/catalog.md` and `docs/palo-alto/runs.md`. The next city gets the same pair, `docs/<city>/catalog.md` and `docs/<city>/runs.md`. This file stays the list of every jurisdiction.
+
 Checked November 4, 2026. SeeClickFix results are from `GET /api/v2/issues/new` at a downtown point, and only count when the organization is that city or the city page names SeeClickFix. A SeeClickFix place page is not evidence. Palo Alto has one and uses PublicStuff.
 
 Effort is the work to add a skill like Palo Alto. Photo GPS, JPEG conversion, and reverse geocoding already live in `file-311-common`. The client, catalog, account file, and boundary check do not carry over.

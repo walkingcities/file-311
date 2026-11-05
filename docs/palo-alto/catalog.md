@@ -1,8 +1,8 @@
 # Palo Alto 311 catalog
 
-Every request type in [`skills/palo-alto/catalog.json`](../skills/palo-alto/catalog.json). A checkmark in the Run column links to that photo run in [`runs.md`](runs.md).
+Every request type in [`skills/palo-alto/catalog.json`](../../skills/palo-alto/catalog.json). A checkmark in the Run column links to that photo run in [`runs.md`](runs.md). This file is Palo Alto only. The list of other places is [`../jurisdictions.md`](../jurisdictions.md).
 
-Street Light Out is also covered offline by [`tests/test_street_light.py`](../tests/test_street_light.py). That test uses a stand-in photo and does not call the city, so its row stays open until a camera-photo run is recorded here.
+Street Light Out is also covered offline by [`tests/test_street_light.py`](../../tests/test_street_light.py). That test uses a stand-in photo and does not call the city. The camera-photo run is [Street light out, November 4, 2026](runs.md#street-light-out-november-4-2026).
 
 ## Source
 
@@ -59,7 +59,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 1020092 | [Park Pathways](#park-pathways) |
 |  | 1020093 | [Park Lighting](#park-lighting) |
 |  | 1020094 | [Park Improvement Requests](#park-improvement-requests) |
-|  | 32794 | [Street Light Out](#street-light-out) |
+| [✅](runs.md#street-light-out-november-4-2026) | 32794 | [Street Light Out](#street-light-out) |
 |  | 1006534 | [Potholes in Bike Lanes and/or Roadways](#potholes-in-bike-lanes-andor-roadways) |
 |  | 15507 | [Clog/Debris on Storm Drain Grate](#clogdebris-on-storm-drain-grate) |
 |  | 1012063 | [Electric Vehicle Charging Station(s)](#electric-vehicle-charging-stations) |
@@ -454,6 +454,8 @@ Id 1020094. This report is public. An address is not required.
 - Park Name/Location (42400, text, required, staff-only).
 
 ### Street Light Out
+
+Example run recorded. See [Street light out, November 4, 2026](runs.md#street-light-out-november-4-2026).
 
 Please allow 5 business days for us to make repairs.
 

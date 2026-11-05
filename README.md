@@ -30,6 +30,10 @@ Not submitted yet. Someone with a Claude Pro plan needs to submit the repo at [c
 2. On the Discover tab, search for `file-311`.
 3. Choose Install for you.
 
+### Codex
+
+Not submitted yet. OpenAI says: "We are not accepting more skills-only submissions at this time." See the [plugin guidelines](https://developers.openai.com/plugins/plugin-guidelines). The upload package is `dist/file-311-1.0.1.zip`, built with `python3 scripts/package_openai_zip.py`.
+
 ### Install the skills directly
 
 Use this until a marketplace listing is approved. Global install is the default. Someone filing a street light is not inside a project repo.

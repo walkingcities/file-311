@@ -1,11 +1,28 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "file-311",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "File a city 311 report from a photo.",
   "author": {
-    "name": "Christopher Kao"
+    "name": "Walking Cities"
   },
   "license": "MIT",
-  "repository": "https://github.com/walkingcities/file-311"
+  "repository": "https://github.com/walkingcities/file-311",
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "File 311",
+        "shortDescription": "311 report from a photo",
+        "longDescription": "Prepare a Palo Alto 311 report from a camera photo. The agent shows the request before anything is sent. One city is supported today.",
+        "developerName": "Walking Cities",
+        "category": "Productivity",
+        "websiteURL": "https://github.com/walkingcities/file-311",
+        "supportURL": "https://github.com/walkingcities/file-311/issues",
+        "privacyPolicyURL": "https://github.com/walkingcities/file-311/blob/main/PRIVACY.md",
+        "termsOfServiceURL": "https://github.com/walkingcities/file-311/blob/main/TERMS.md",
+        "logo": "./assets/logo.jpg",
+        "composerIcon": "./assets/logo.jpg"
+      }
+    }
+  }
 }

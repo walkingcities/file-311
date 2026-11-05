@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "file-311",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "File a city 311 report from a photo.",
   "author": {
     "name": "Walking Cities"
@@ -13,7 +13,7 @@
       "interface": {
         "displayName": "File 311",
         "shortDescription": "311 report from a photo",
-        "longDescription": "Prepare a Palo Alto or Redwood City 311 report from a camera photo. The agent shows the request before anything is sent.",
+        "longDescription": "Prepare a Palo Alto, Redwood City, or Menlo Park 311 report from a camera photo. The agent shows the request before anything is sent.",
         "developerName": "Walking Cities",
         "category": "Productivity",
         "websiteURL": "https://github.com/walkingcities/file-311",

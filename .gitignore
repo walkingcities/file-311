@@ -7,3 +7,6 @@ __pycache__/
 # Sign-in and previews belong in ~/.config/paloalto311/, not in git.
 account.json
 preview.json
+
+# OpenAI plugin upload package.
+dist/

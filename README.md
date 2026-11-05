@@ -30,6 +30,10 @@ Not submitted yet. Someone with a Claude Pro plan needs to submit the repo at [c
 2. On the Discover tab, search for `file-311`.
 3. Choose Install for you.
 
+### Codex
+
+Not submitted yet. Build the upload package with `python3 scripts/package_openai_zip.py`, then upload `dist/file-311-1.0.0.zip` from the OpenAI plugin dashboard.
+
 ### Install the skills directly
 
 Use this until a marketplace listing is approved. Global install is the default. Someone filing a street light is not inside a project repo.

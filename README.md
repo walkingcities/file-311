@@ -6,7 +6,15 @@ This repo has one city today: Palo Alto. Install it once, drop a photo into Curs
 
 This is an unofficial client of the city's PaloAlto311 site. It only files reports inside Palo Alto.
 
-Other places are listed in [docs/jurisdictions.md](docs/jurisdictions.md), with the system each one uses and how hard it is to add. Eleven cities already have a public SeeClickFix API. Claim a row by putting your GitHub name and an ETA in that file, then open a pull request for the skill. Review the other pull requests. A photo is never sent until the person filing it agrees.
+Other places are listed in [docs/jurisdictions.md](docs/jurisdictions.md), with the system each one uses and how hard it is to add. We are looking for volunteers to help add skills for different cities/jursidictions. Claim a row by putting your GitHub name and an ETA in that file, then open a pull request for the skill. 
+
+Fig 1 shows an example of a Palo Alto 311 submission using the palo-alto skill for a street light out at 125 University Ave, November 4, 2026. Cursor asked me to confirm and then submitted the PaloAlto311 request [18868128](https://iframe.publicstuff.com/#?client_id=406&request_id=18868128) (Fig 2). The run is written up in [docs/palo-alto/runs.md](docs/palo-alto/runs.md#street-light-out-november-4-2026).
+
+![Chat: the preview, the confirmation, and request 18868128](docs/palo-alto/street-light-out-2026-11-04-chat.jpg)
+Fig 1. Cursor chat history where I attached the camera photo, read the preview, then confirmed.
+
+![PaloAlto311 request 18868128, submitted at 125 University Ave](docs/palo-alto/street-light-out-2026-11-04-request.jpg)
+Fig 2. Palo Alto 311 submission.
 
 ## Install
 

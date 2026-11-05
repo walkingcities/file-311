@@ -6,6 +6,8 @@ This repo has one city today: Palo Alto. Install the skill once, drop a photo in
 
 This is an unofficial client of the city's PaloAlto311 site. It only files reports inside Palo Alto.
 
+Other places are listed in [docs/jurisdictions.md](docs/jurisdictions.md), with the system each one uses and how hard it is to add. Eleven cities already have a public SeeClickFix API. Claim a row by putting your GitHub name and an ETA in that file, then open a pull request for the skill. Review the other pull requests. A photo is never sent until the person filing it agrees.
+
 ## Install
 
 Global install is the default. Someone filing a street light is not inside a project repo.

@@ -10,7 +10,8 @@
     {
       "name": "file-311",
       "source": ".",
-      "description": "File a city 311 report from a photo."
+      "description": "File a city 311 report from a photo.",
+      "logo": "assets/logo.jpg"
     }
   ]
 }

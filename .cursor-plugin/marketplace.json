@@ -1,0 +1,16 @@
+{
+  "name": "file-311",
+  "owner": {
+    "name": "Christopher Kao"
+  },
+  "metadata": {
+    "description": "File a city 311 report from a photo."
+  },
+  "plugins": [
+    {
+      "name": "file-311",
+      "source": ".",
+      "description": "File a city 311 report from a photo."
+    }
+  ]
+}

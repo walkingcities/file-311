@@ -20,6 +20,8 @@ npx skills@latest add walkingcities/file-311 -g -a cursor -a claude-code -a code
 
 One copy of each skill is installed, and the other agents symlink to it. Updates are `npx skills update`.
 
+Cursor can also install the repo as a plugin. In Customize, choose From GitHub Repository and paste `https://github.com/walkingcities/file-311`. That installs both skills together, which is what Palo Alto needs: its script imports `file-311-common` from the folder beside it. The root `plugin.json` is the [Agent Plugins](https://agent-plugins.org/specification) manifest, so the same package loads in other clients that follow that spec. `.cursor-plugin/marketplace.json` is only Cursor's catalog. `.claude-plugin/marketplace.json` is Claude Code's catalog of the same two skill folders.
+
 To install only Palo Alto, name both the city skill and the library it imports:
 
 ```bash

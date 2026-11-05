@@ -1,0 +1,902 @@
+[
+  {
+    "id": 1001535,
+    "name": "Water Quality",
+    "description": "",
+    "confirmation": "Thank you for submitting this water quality issue. You will be notified with progress updates, if any email address we provided.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 39065,
+        "name": "Water Quality Complaint",
+        "type": "multiselect",
+        "required": true,
+        "staff_only": true,
+        "options": [
+          "Taste",
+          "Odor",
+          "Color",
+          "Turbidity",
+          "Air",
+          "High Pressure",
+          "Low Pressure",
+          "Water Outage",
+          "Suspended Solids",
+          "Other"
+        ]
+      },
+      {
+        "id": 39066,
+        "name": "Water Quality Issue Description",
+        "type": "text",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 23862,
+    "name": "Illegal Dumping on Public Property",
+    "description": "Items dumped illegally in the public right of way will be scheduled for pickup. Examples of acceptable items include: mattresses, furniture, etc. This includes city owned buildings, streets, sidewalks, parking facilities, etc...",
+    "confirmation": "Thank you for submitting your request.  Staff will be assigned to complete this.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3371,
+        "name": "Please check off all debris that is present.",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": true,
+        "options": [
+          "Compressed Gas",
+          "Furniture",
+          "Green trimmings",
+          "Household appliances",
+          "Paint",
+          "Trash",
+          "Unknown liquid"
+        ]
+      },
+      {
+        "id": 3372,
+        "name": "Please estimate how much debris is present.",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": true,
+        "options": [
+          "Equal to a standard pick-up truck bed",
+          "Less than a standard pick-up truck bed",
+          "More than a standard pick-up truck bed"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14085,
+    "name": "Hydrant Problem",
+    "description": "Hydrant leaking water or requires other maintenance.",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your hydrant request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3289,
+        "name": "Is water spewing into the air?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3286,
+        "name": "Is there an electrical line above the spewing water?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3287,
+        "name": "Is the hydrant leaking?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3288,
+        "name": "If water is not spewing/hydrant leaking, pls describe request.",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 27265,
+    "name": "Illegal Construction",
+    "description": "",
+    "confirmation": "Thank you for notifying The City of this potential code violation. Your request will be entered into our code tracking software by one of The City's code enforcement employees, and you will be provided with a tracking number within the next 5 business days.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 15459,
+    "name": "Parking Meters",
+    "description": "Problem with a parking meter (pay station or coin operated).",
+    "confirmation": "Thank you for submitting your request. Staff will follow up with your parking meter request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3290,
+        "name": "Is the problem with a parking pay station?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3291,
+        "name": "If so, please check all problems with pay station.",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "Meter has been vandalized",
+          "Out of receipt paper",
+          "Unit will not operate at all"
+        ]
+      },
+      {
+        "id": 3292,
+        "name": "Please describe \"other\" pay station problem.",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3294,
+        "name": "Is the problem with a coin-only parking meter?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3293,
+        "name": "If so, please check all problems with coin-only meter.",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "Meter has been vandalized",
+          "Meter jammed, can't insert coins",
+          "Meter seems to be broken"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1009139,
+    "name": "Customer Leak Questions",
+    "description": "Questions about customer leak, receiving leak emails, receiving leak door hangers.",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1009144,
+    "name": "Recycled Water Questions",
+    "description": "Question in relation to the City's Recycled Water Program",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 28868,
+    "name": "Residential Noise",
+    "description": "",
+    "confirmation": "Thank you for notifying The City of this noise complaint. Your request will be delivered to our Police Department for follow up. Responses to requests will take place during business days (Monday-Friday). The Police Department can only address a noise complaint while the noise is occurring. If you would like immediate assistance please call 780-7100.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1009148,
+    "name": "Construction Meter",
+    "description": "Questions in relation to Potable and Recycled Water construction meter",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1010249,
+    "name": "No Water Issue - Non Billing Related",
+    "description": "",
+    "confirmation": "Thank you for submitting the request. Staff will follow up with your high/low pressure request, and update you on progress through this system. (PLEASE CALL POLICE DISPATCH 650-780-7118 IF THIS IS HAPPENING OUTSIDE OF Mon. - Fri. 7:00am - 3:30pm)",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 14086,
+    "name": "Water Leak",
+    "description": "If water is spewing onto the street or sidewalk, please submit a request and Public Works will respond immediately.",
+    "confirmation": "Thank you for submitting the request. Staff will follow up with your water leak request, and update you on progress through this system. (PLEASE CALL POLICE DISPATCH 650-780-7118 IF THIS IS HAPPENING OUTSIDE OF Mon. - Fri. 7:00am - 3:30pm)",
+    "require_address": false,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3322,
+        "name": "Location of leak (choose best option).",
+        "type": "singleselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "Inside a private property",
+          "On the street",
+          "On the street (near sewer manhole)",
+          "Outside a private property"
+        ]
+      },
+      {
+        "id": 3319,
+        "name": "Other location of leak (Please Describe)",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3321,
+        "name": "Does the water smell like sewage?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3320,
+        "name": "Is the water causing a flood?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3323,
+        "name": "Is traffic being affected?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 27266,
+    "name": "Overgrown Weeds",
+    "description": "",
+    "confirmation": "Thank you for notifying The City of this potential code violation. Your request will be entered into our code tracking software by one of The City's code enforcement employees, and you will be provided with a tracking number within the next 5 business days.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1001862,
+    "name": "Report Water Waste",
+    "description": "",
+    "confirmation": "Thank you for helping Redwood City conserve water. Staff will follow up with your request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 4749,
+        "name": "Address Requirements",
+        "type": "display",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 4750,
+        "name": "Violation",
+        "type": "singleselect",
+        "required": true,
+        "staff_only": true,
+        "options": [
+          "Fountain using water and not recirculating",
+          "Hotel did not give guest option to not launder linens",
+          "Irrigating during rainfall",
+          "Irrigating within 48 hours after rainfall",
+          "Irrigation water runoff",
+          "Restaurant serves water without request",
+          "Washing car without shutoff nozzle",
+          "Washing driveway or sidewalk"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1009158,
+    "name": "Water Meter Issues",
+    "description": "Questions about meter replacement and meter related issues",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1001863,
+    "name": "Conservation Assistance",
+    "description": "Questions about the City's conservation program",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 4752,
+        "name": "Help with MyWater",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 4753,
+        "name": "Help with a rebate",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 4754,
+        "name": "Recycled Water Fill Station Program",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 4755,
+        "name": "Other",
+        "type": "text",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 1013691,
+    "name": "Smoking Violation",
+    "description": "",
+    "confirmation": "",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1019988,
+    "name": "Homeless",
+    "description": "Use this request type to report any homeless encampments, vehicles, unhoused individuals sleeping on the ground, and/or other issues.",
+    "confirmation": "Thank you for submitting your request.  Staff will be assigned to review your request.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 26420,
+    "name": "Tree Branch Down",
+    "description": "",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your branch down request, and update you on progress through this system. (if this is an emergency, and immediate response is required please call 650-780-7464)",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 23498,
+    "name": "Other",
+    "description": "If you cannot locate a request category that matches your request, please use the \"Other\" category to submit your request.",
+    "confirmation": "Thank you for submitting your request.  We will look into assigning your request to the correct department. Please watch for updates about your request using the tracking number that has been assigned to this request.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1009467,
+    "name": "Downtown Decorative Tree Lighting",
+    "description": "",
+    "confirmation": "Thank you for submitting your lighting request. Staff will be assigned soon to investigate the issue.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1007816,
+    "name": "Tree Other",
+    "description": "",
+    "confirmation": "Thank you for submitting your request. Staff will follow up with your tree request, and update you on progress through this system.  (if this is an emergency, and immediate response is required please call 650-780-7464)",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1009141,
+    "name": "Backflow/Well Questions",
+    "description": "Questions about the City's Cross Connection program (Backflow and Well).",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 27264,
+    "name": "Construction Noise",
+    "description": "",
+    "confirmation": "Thank you for notifying The City of this potential code violation. Your request will be entered into our code tracking software by one of The City's code enforcement employees, and you will be provided with a tracking number within the next 5 business days.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1009954,
+    "name": "High/Low Pressure Issue",
+    "description": "",
+    "confirmation": "Thank you for submitting the request. Staff will follow up with your high/low pressure request, and update you on progress through this system. (PLEASE CALL POLICE DISPATCH 650-780-7118 IF THIS IS HAPPENING OUTSIDE OF Mon. - Fri. 7:00am - 3:30pm)",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1009138,
+    "name": "High Bill Questions",
+    "description": "Questions in regards to high water bill.",
+    "confirmation": "Thank you for contacting Redwood City Water Resources Program. Staff will review your request, and will be in touch with you soon.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1005036,
+    "name": "Abandoned Shopping Cart",
+    "description": "",
+    "confirmation": "",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1010483,
+    "name": "Glass/Debris in Street",
+    "description": "Items such as broken glass, litter, etc. in the street or on the sidewalk.",
+    "confirmation": "Thank you for submitting your request.  Staff will be assigned to complete this.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 18477,
+    "name": "ROW - Graffiti Removal - Public Property",
+    "description": "",
+    "confirmation": "Thank you for bringing this to our attention. This case will be assigned to the Police Department and City Graffiti Team within the next 2 business days. Please be aware that it could take several days to remove the graffiti depending on the workload of City staff.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3310,
+        "name": "What is the graffiti on?",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "A building",
+          "A fence or wall",
+          "A sidewalk or street",
+          "A street sign or pole"
+        ]
+      },
+      {
+        "id": 3312,
+        "name": "Where exactly is the graffiti located?",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3314,
+        "name": "Please provide any known suspect information.",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 2469,
+    "name": "Pothole",
+    "description": "Report potholes within Redwood City limits here. \n\nPotholes on Woodside Road or El Camino Real are repaired by Caltrans. To submit a Caltrans request, please call (916) 654-5266 or visit http://www.dot.ca.gov/hq/maint/msrsubmit",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your pothole request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3343,
+        "name": "Is the pothole located in a lane of traffic?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3344,
+        "name": "Please estimate the width of the pothole.",
+        "type": "singleselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "Less than 12 inches across.",
+          "More than 12 inches across."
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1008709,
+    "name": "Tree Pruning",
+    "description": "",
+    "confirmation": "Thank you for submitting your request. Staff will follow up with your tree request, and update you on progress through this system.  (if this is an emergency, and immediate response is required please call 650-780-7464)",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1010750,
+    "name": "Right of Way - Repainting of Curb & Pavement",
+    "description": "Repainting only. New curb and pavement markings must go through CD/Traffic Eng. staff for review and approval",
+    "confirmation": "",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 24363,
+    "name": "Sidewalk",
+    "description": "",
+    "confirmation": "",
+    "require_address": false,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 32016,
+    "name": "Sign Knockdown",
+    "description": "",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your sign request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 32017,
+    "name": "Sign Repair",
+    "description": "",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your sign request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3402,
+        "name": "Is there an damage to the pole?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": true,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 27268,
+    "name": "Dayburner",
+    "description": "Street light is on during the day.",
+    "confirmation": "Thank you for submitting this request. This Dayburner will be referred to Public Works' street light maintenance contractor for repair. You will be updated on the progress within the next 3 business days.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3345,
+        "name": "Please provide street name and Cross Street.",
+        "type": "text",
+        "required": true,
+        "staff_only": true,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 2499,
+    "name": "Other Street Light Problem",
+    "description": "",
+    "confirmation": "Thank you for submitting this request. Staff will follow up with your street light request, and update you on progress through this system.",
+    "require_address": false,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3331,
+        "name": "Street light pole fell on the street.",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3332,
+        "name": "Electrical wires fell on the street.",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 27267,
+    "name": "Street Light Outage",
+    "description": "Street light bulb out.",
+    "confirmation": "Thank you for submitting this request. The Outage will be referred to Public Works' street light maintenance contractor for repair. You will be updated on the progress within the next 3 business days.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3346,
+        "name": "Please provide street name and Cross Street.",
+        "type": "text",
+        "required": true,
+        "staff_only": true,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 2498,
+    "name": "Traffic Signal Problem",
+    "description": "Traffic signal light out, flashing, or if the pole has fallen on the street.",
+    "confirmation": "Thank you for submitting your request. Staff will follow up with your traffic signal request, and update you on progress through this system.",
+    "require_address": false,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3333,
+        "name": "Traffic signal bulb is out.",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3334,
+        "name": "Red light is flashing.",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3335,
+        "name": "Traffic signal pole has fallen on the street.",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 1004760,
+    "name": "Graffiti Removal - Private Property",
+    "description": "",
+    "confirmation": "Thank you for bringing this to our attention. This case will be assigned to the Police Department and City Graffiti Team within the next 2 business days. Please be aware that it could take several days to remove the graffiti depending on the workload of City staff.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3310,
+        "name": "What is the graffiti on?",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "A building",
+          "A fence or wall",
+          "A sidewalk or street",
+          "A street sign or pole"
+        ]
+      },
+      {
+        "id": 3312,
+        "name": "Where exactly is the graffiti located?",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3314,
+        "name": "Please provide any known suspect information.",
+        "type": "text",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      }
+    ]
+  },
+  {
+    "id": 30400,
+    "name": "Illegal Dumping on Private Property",
+    "description": "Redwood City is not allowed to remove belongings from private property. If this is a repeat offence the city's code enforcement team can potentially fine the owner if items are not properly disposed of in a timely manor.",
+    "confirmation": "Thank you for submitting your request.  Redwood City's code enforcement will investigate the situation, and update you on progress through myRWC.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3396,
+        "name": "Please estimate how much debris is present.",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": true,
+        "options": [
+          "Equal to a standard pick-up truck bed",
+          "Less than a standard pick-up truck bed",
+          "More than a standard pick-up truck bed"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 1009801,
+    "name": "Parking in Red Zone",
+    "description": "Vehicles Parked Illegally in a Red Zone\n(Please call 780-7100 for immediate response)",
+    "confirmation": "Thank you for bringing this to our attention. This case will be assessed by the Police Department Traffic Supervisor within the next 2 business days. Please be aware that if the vehicle has been moved before this request is received we will not be able to take action. If you need someone to come out right away, please call 650-780-7100. Thank You.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 1019310,
+    "name": "Bicycle-related incidents",
+    "description": "",
+    "confirmation": "",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 2496,
+    "name": "Abandoned Vehicles",
+    "description": "72 hours or greater.",
+    "confirmation": "Thank you for bringing this to our attention. This case will be assigned to the Abandoned Vehicle Program Manager within the next two business days. Please be aware that abandoned vehicles may not be removed by the City until at least 72 hours have elapsed from the time an officer inspects the vehicle.",
+    "require_address": true,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3357,
+        "name": "Cross streets/specific address where vehicle is located?",
+        "type": "text",
+        "required": true,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 3358,
+        "name": "Please describe the vehicle (make, model, color)?",
+        "type": "text",
+        "required": true,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 3355,
+        "name": "What is the license plate number?",
+        "type": "text",
+        "required": true,
+        "staff_only": true,
+        "options": []
+      },
+      {
+        "id": 3356,
+        "name": "Why do you think this vehicle is abandoned?",
+        "type": "multiselect",
+        "required": true,
+        "staff_only": true,
+        "options": [
+          "The vehicle is stripped.",
+          "Vehicle parked over 72 hours"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 32018,
+    "name": "Sign Other",
+    "description": "",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your sign request, and update you on progress through this system.",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 24364,
+    "name": "Tree Down",
+    "description": "",
+    "confirmation": "Thank you for submitting your request. Staff will follow up with your tree down request, and update you on progress through this system.  (if this is an emergency, and immediate response is required please call 650-780-7464)",
+    "require_address": true,
+    "force_private": true,
+    "fields": []
+  },
+  {
+    "id": 14988,
+    "name": "Manhole",
+    "description": "Metal cover missing or not fitting properly.",
+    "confirmation": "Thank you for submitting your request.  Staff will follow up with your manhole request, and update you on progress through this system.",
+    "require_address": false,
+    "force_private": true,
+    "fields": [
+      {
+        "id": 3285,
+        "name": "What shape is the missing/damage cover (choose best option).",
+        "type": "singleselect",
+        "required": false,
+        "staff_only": false,
+        "options": [
+          "Large circular cover (sewer manhole)",
+          "Rectangle",
+          "Small circular cover (water main)",
+          "Square",
+          "Triangle (recycled water)"
+        ]
+      },
+      {
+        "id": 3283,
+        "name": "Is the cover or lid missing?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3284,
+        "name": "Is the cover or lid not seated properly (not flush with street)?",
+        "type": "checkbox",
+        "required": false,
+        "staff_only": false,
+        "options": []
+      },
+      {
+        "id": 3330,
+        "name": "Location of backup",
+        "type": "multiselect",
+        "required": false,
+        "staff_only": true,
+        "options": [
+          "Cleanout",
+          "Manhole out in street",
+          "In Building",
+          "In Yard"
+        ]
+      }
+    ]
+  }
+]

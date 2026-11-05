@@ -15,6 +15,7 @@
       "strict": false,
       "skills": [
         "./skills/palo-alto",
+        "./skills/redwood-city",
         "./skills/file-311-common"
       ]
     }

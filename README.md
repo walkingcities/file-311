@@ -2,9 +2,9 @@
 
 File a city 311 report from a photo.
 
-This repo has one city today: Palo Alto. Install it once, drop a photo into Cursor or Claude Code, and say what is wrong. The agent prepares the report. Nothing is sent until you agree.
+This repo files two cities today: Palo Alto and Redwood City. Install it once, drop a photo into Cursor or Claude Code, and say what is wrong. The agent prepares the report. Nothing is sent until you agree.
 
-This is an unofficial client of the city's PaloAlto311 site. It only files reports inside Palo Alto.
+This is an unofficial client of PaloAlto311 and of Redwood City's myRWC. A photo is filed only in the city it was taken.
 
 Other places are listed in [docs/jurisdictions.md](docs/jurisdictions.md), with the system each one uses and how hard it is to add. We are looking for volunteers to help add skills for different cities/jursidictions. Claim a row by putting your GitHub name and an ETA in that file, then open a pull request for the skill. 
 
@@ -18,7 +18,7 @@ Fig 2. Palo Alto 311 submission.
 
 ## Install
 
-Install the `file-311` plugin from the marketplace. That is the preferred install in Cursor and Claude Code. The plugin installs Palo Alto and `file-311-common` together. The city script imports that library from the folder beside it.
+Install the `file-311` plugin from the marketplace. That is the preferred install in Cursor and Claude Code. The plugin installs Palo Alto, Redwood City, and `file-311-common` together. The city script imports that library from the folder beside it.
 
 Neither listing is available to install yet. Until one is approved, [install the skills directly](#install-the-skills-directly).
 
@@ -60,7 +60,7 @@ To install only Palo Alto, name both the city skill and the library it imports:
 npx skills@latest add walkingcities/file-311 --skill palo-alto --skill file-311-common -g -a cursor -a claude-code -a codex -y
 ```
 
-Copy the folders yourself when Node is an extra requirement for a Python script. Copy `skills/file-311-common/` and `skills/palo-alto/` into the same skills directory:
+Copy the folders yourself when Node is an extra requirement for a Python script. Copy `skills/file-311-common/`, `skills/palo-alto/`, and `skills/redwood-city/` into the same skills directory:
 
 - Cursor: `~/.cursor/skills/`
 - Claude Code: `~/.claude/skills/`
@@ -70,21 +70,21 @@ Copy the folders yourself when Node is an extra requirement for a Python script.
 
 Drop the original photo into the chat. It must be the camera file, with location saved. On iPhone, Camera needs Precise Location. A screenshot or a re-saved image has no GPS, and the skill stops and asks for the original.
 
-Say what is wrong, such as a street light that is out. The agent prepares a preview: request type, address, cross street, description, and the custom fields. It says which fields are public. For a street light, the photo and the location are public. Name and phone are staff-only.
+Say what is wrong, such as a street light that is out. The agent prepares a preview: request type, address, cross street, description, and the custom fields. It says which fields are public. For a Palo Alto street light, the photo and the location are public, and name and phone are staff-only. A Redwood City street light is private in the myRWC catalog. The photo and the location are still sent to the city.
 
-Nothing is sent until you agree. The agent then prints the request id and the PaloAlto311 URL.
+Nothing is sent until you agree. The agent then prints the request id and the request URL.
 
-The city form means picking a category, typing the address, and filling the fields. Here that is a dropped photo and a confirmation. The city still asks for up to 5 business days on a street light. The street-light desk is (650) 496-6916 on workdays. A power outage is a different report, (650) 496-6914.
+The city form means picking a category, typing the address, and filling the fields. Here that is a dropped photo and a confirmation. Palo Alto asks for up to 5 business days on a street light. The street-light desk is (650) 496-6916 on workdays. A power outage is a different report, (650) 496-6914. myRWC's street-light confirmation says Public Works' contractor will send an update within 3 business days. Redwood City publishes (650) 780-7464 for street problems.
 
-A photo outside Palo Alto is refused. Another city will be a new folder under `skills/`.
+A photo outside the chosen city is refused. Another city will be a new folder under `skills/`.
 
-[docs/palo-alto/catalog.md](docs/palo-alto/catalog.md) lists every Palo Alto request type. A checkmark in its Run column links to the matching photo run in [docs/palo-alto/runs.md](docs/palo-alto/runs.md). Those two files are Palo Alto only. Another city gets the same pair under `docs/<city>/`.
+[docs/palo-alto/catalog.md](docs/palo-alto/catalog.md) lists every Palo Alto request type. A checkmark in its Run column links to the matching photo run in [docs/palo-alto/runs.md](docs/palo-alto/runs.md). Redwood City has the same pair in [docs/redwood-city/catalog.md](docs/redwood-city/catalog.md) and [docs/redwood-city/runs.md](docs/redwood-city/runs.md). No Redwood City camera run is recorded yet.
 
 A JPEG works on any computer. The Python script reads its location. A HEIC photo needs a Mac: Swift reads the location, and `sips` converts it for upload. The Swift file is `skills/file-311-common/photo-gps.swift`. The compiled binary is not part of this repo. On Linux or Windows, export the photo as a JPEG.
 
 ## One-time setup
 
-The first report asks for the PaloAlto311 email, password, name, and phone. You need an account on the city's 311 site, [Report an Issue](https://www.paloalto.gov/Residents/Services/Report-an-Issue). The password is passed only as an environment variable and is not saved. Email, name, phone, and the API key are stored in `~/.config/paloalto311/account.json` with mode `600`. Deleting that file signs you out. Later reports reuse it.
+The first report asks for the email, password, name, and phone on that city's 311 site. Palo Alto uses [Report an Issue](https://www.paloalto.gov/Residents/Services/Report-an-Issue). Redwood City uses [myRWC](https://www.redwoodcity.org/i-want-to/report/myrwc-report-problem-request-service). The password is passed only as an environment variable and is not saved. Email, name, phone, and the API key are stored with mode `600` in `~/.config/paloalto311/account.json` or `~/.config/myrwc/account.json`. The two accounts are separate. Deleting the file signs you out of that city. Later reports reuse it.
 
 ## Run the script
 
@@ -97,6 +97,8 @@ python3 skills/palo-alto/scripts/paloalto311.py prepare --photo "/path/to/photo.
 PALOALTO311_EMAIL="..." PALOALTO311_PASSWORD="..." PALOALTO311_NAME="..." PALOALTO311_PHONE="..." \
   python3 skills/palo-alto/scripts/paloalto311.py login
 python3 skills/palo-alto/scripts/paloalto311.py submit --confirm
+python3 skills/redwood-city/scripts/myrwc.py show "Street Light Outage"
+python3 skills/redwood-city/scripts/myrwc.py prepare --photo "/path/to/photo.jpg"
 ```
 
 `prepare` writes a preview and does not send it. `submit` sends only when `--confirm` is present.

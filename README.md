@@ -12,9 +12,11 @@ Other places are listed in [docs/jurisdictions.md](docs/jurisdictions.md), with 
 
 Install the `file-311` plugin from the marketplace. That is the preferred install in Cursor and Claude Code. The plugin installs Palo Alto and `file-311-common` together. The city script imports that library from the folder beside it.
 
-The marketplace listings are not approved yet. Until they are, [install the skills directly](#install-the-skills-directly).
+Neither listing is available to install yet. Until one is approved, [install the skills directly](#install-the-skills-directly).
 
 ### Cursor
+
+Submitted to the Cursor Marketplace on November 5, 2026. It is awaiting approval. Once it is listed:
 
 1. Open Customize in the sidebar.
 2. Search the Marketplace for `file-311`.
@@ -22,13 +24,15 @@ The marketplace listings are not approved yet. Until they are, [install the skil
 
 ### Claude Code
 
+Not submitted yet. Someone with a Claude Pro plan needs to submit the repo at [claude.ai/directory/manage](https://claude.ai/directory/manage). Once it is listed:
+
 1. Start Claude Code and run `/plugin`.
 2. On the Discover tab, search for `file-311`.
 3. Choose Install for you.
 
 ### Install the skills directly
 
-Use this until the marketplace listings are approved. Global install is the default. Someone filing a street light is not inside a project repo.
+Use this until a marketplace listing is approved. Global install is the default. Someone filing a street light is not inside a project repo.
 
 You need Node 22.20 or newer. `npx` downloads and runs an npm package. `skills` is the [Vercel skills CLI](https://github.com/vercel-labs/skills), a separate tool from this repo. `@latest` means the newest published version of that CLI. The CLI then downloads `walkingcities/file-311` from GitHub and installs every skill in the repo: the shared library and each city. This does not install an npm package named file-311.
 

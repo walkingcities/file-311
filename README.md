@@ -32,7 +32,7 @@ Not submitted yet. Someone with a Claude Pro plan needs to submit the repo at [c
 
 ### Codex
 
-Not submitted yet. Build the upload package with `python3 scripts/package_openai_zip.py`, then upload `dist/file-311-1.0.0.zip` from the OpenAI plugin dashboard.
+Not submitted yet. Build the upload package with `python3 scripts/package_openai_zip.py`, then upload `dist/file-311-1.0.1.zip` from the OpenAI plugin dashboard.
 
 ### Install the skills directly
 

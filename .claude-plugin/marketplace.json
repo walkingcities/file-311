@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "File a city 311 report from a photo.",
-    "version": "1.0.0"
+    "version": "1.0.1"
   },
   "plugins": [
     {

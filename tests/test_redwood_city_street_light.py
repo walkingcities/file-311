@@ -300,3 +300,36 @@ class RedwoodCityStreetLightTests(unittest.TestCase):
         preview = self.prepare(type="Homeless", description="A camp is beside the sidewalk.")
         self.assertIn("person", preview["caution"])
         self.assertFalse(preview["public"])
+
+    def test_abandoned_vehicle_corner_comes_from_the_geocoder(self):
+        self.network.side_effect = self.geocode_only
+        preview = self.prepare(type="Abandoned Vehicles", description="A car has been parked here for days.")
+        self.assertEqual(preview["custom_fields"]["3357"], CORNER)
+        missing = [field["name"] for field in preview["missing_fields"]]
+        self.assertNotIn("Cross streets/specific address where vehicle is located?", missing)
+        self.assertIn("What is the license plate number?", missing)
+
+    def test_graffiti_confirmation_is_not_a_stop(self):
+        self.network.side_effect = self.geocode_only
+        preview = self.prepare(type="ROW - Graffiti Removal - Public Property", description="Graffiti on the sidewalk.")
+        self.assertEqual(preview["caution"], "")
+        self.assertIn("Police Department", preview["confirmation"])
+
+    def test_residential_noise_caution_is_the_confirmation(self):
+        self.network.side_effect = self.geocode_only
+        preview = self.prepare(type="Residential Noise", description="Loud music from the house.")
+        self.assertIn("while the noise is occurring", preview["caution"])
+        self.assertIn("780-7100", preview["caution"])
+
+    def test_submit_uses_a_corner_edited_in_the_preview(self):
+        self.network.side_effect = self.geocode_only
+        preview = self.prepare()
+        preview["cross_street"] = "Broadway & Jefferson Ave"
+        self.preview_path.write_text(json.dumps(preview))
+        self.sign_in()
+        self.network.reset_mock()
+        self.network.side_effect = self.city_api
+        with contextlib.redirect_stdout(io.StringIO()):
+            myrwc.command_submit(argparse.Namespace(preview=None, confirm=True))
+        values = form_values(self.submitted)
+        self.assertEqual(json.loads(values["custom_field_3346"]), "Broadway & Jefferson Ave")

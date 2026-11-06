@@ -39,7 +39,7 @@ MYRWC_EMAIL="..." MYRWC_PASSWORD="..." MYRWC_NAME="..." MYRWC_PHONE="..." python
 python3 "$SCRIPT" submit --confirm
 ```
 
-`prepare` writes `~/.config/myrwc/preview.json`. `submit` reads that preview, checks the pin is still in Redwood City, and refuses a missing photo. If the user only changes the corner, edit `cross_street` in that file, then submit. `submit` copies that cross street into "Please provide street name and Cross Street." The formatted address is the report address. It is not a separate custom field on a street light.
+`prepare` writes `~/.config/myrwc/preview.json`. `submit` reads that preview, checks the pin is still in Redwood City, and refuses a missing photo. If the user only changes the corner, edit `cross_street` in that file, then submit. `submit` copies that cross street into "Please provide street name and Cross Street." and into "Cross streets/specific address where vehicle is located?" The formatted address is the report address. It is not a separate custom field on a street light.
 
 The street-light description defaults to "Street light is out." There is no pole number, condition, or damage field. HEIC photos are converted to JPEG before upload. The original photo is the one used for GPS. A JPEG location is read in Python. A HEIC location is read by running `swift` on `photo-gps.swift` in the `file-311-common` skill installed beside this one.
 
@@ -47,7 +47,7 @@ A photo outside Redwood City is refused.
 
 ## Other request types
 
-`show` prints required fields, option names, and which fields are staff-only. The photo fills "Please provide street name and Cross Street." Pass every other answer as `--field ID=value`, using the id from `show`. A single-choice field takes the option name. A checkbox takes `Yes` or `No`, and the script sends `1` or `0`. A multiselect field takes option names separated by commas, and the script sends them as a list. `prepare` lists anything still missing. `submit` refuses until those are filled.
+`show` prints required fields, option names, and which fields are staff-only. The photo fills "Please provide street name and Cross Street." and, on an abandoned vehicle, "Cross streets/specific address where vehicle is located?" Pass every other answer as `--field ID=value`, using the id from `show`. A single-choice field takes the option name. A checkbox takes `Yes` or `No`, and the script sends `1` or `0`. A multiselect field takes option names separated by commas, and the script sends them as a list. `prepare` lists anything still missing. `submit` refuses until those are filled.
 
 Do not put the phone number in the description. Do not send `is_private`. The city already forces every myRWC request private. Do not invent a license plate.
 

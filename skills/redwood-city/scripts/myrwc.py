@@ -35,7 +35,10 @@ CATALOG_PATH = ROOT / "catalog.json"
 ACCOUNT_PATH = Path.home() / ".config" / "myrwc" / "account.json"
 PREVIEW_PATH = Path.home() / ".config" / "myrwc" / "preview.json"
 STREET_LIGHT_ID = 27267
-CORNER_FIELDS = {"Please provide street name and Cross Street."}
+CORNER_FIELDS = {
+    "Please provide street name and Cross Street.",
+    "Cross streets/specific address where vehicle is located?",
+}
 
 sys.stdout.reconfigure(line_buffering=True)
 
@@ -212,11 +215,10 @@ def type_caution(request_type):
             "Use this only when the person asked to report an abandoned vehicle. "
             "Do not invent a license plate, make, model, or color."
         )
+    if name == "Residential Noise" and confirmation:
+        return confirmation
     if name in {"Pothole", "Parking in Red Zone"} and description:
         return description
-    for text in (description, confirmation):
-        if "911" in text or "Police Department" in text:
-            return text
     return ""
 
 

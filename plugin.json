@@ -13,7 +13,7 @@
       "interface": {
         "displayName": "File 311",
         "shortDescription": "311 report from a photo",
-        "longDescription": "Prepare a Palo Alto 311 report from a camera photo. The agent shows the request before anything is sent. One city is supported today.",
+        "longDescription": "Prepare a Palo Alto or Redwood City 311 report from a camera photo. The agent shows the request before anything is sent.",
         "developerName": "Walking Cities",
         "category": "Productivity",
         "websiteURL": "https://github.com/walkingcities/file-311",

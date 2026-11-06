@@ -1,6 +1,6 @@
 # Jurisdictions
 
-Palo Alto is the only place this repo files. A photo outside Palo Alto is refused. Another jurisdiction is a new folder under `skills/`, using the same photo, GPS, and preview-before-send flow. Nothing below is built.
+Palo Alto and Redwood City are the places this repo files. A photo outside that city is refused. Another jurisdiction is a new folder under `skills/`, using the same photo, GPS, and preview-before-send flow. A row that is not Done is not built.
 
 Palo Alto's request-type list and photo runs are `docs/palo-alto/catalog.md` and `docs/palo-alto/runs.md`. The next city gets the same pair, `docs/<city>/catalog.md` and `docs/<city>/runs.md`. This file stays the list of every jurisdiction.
 
@@ -14,9 +14,9 @@ Effort is the work to add a skill like Palo Alto. Photo GPS, JPEG conversion, an
 - **High.** The channel is a closed CRM, an app whose vendor was not captured, or a phone line.
 - **Not confirmed.** This check did not open a live submit form.
 
-Eleven cities are Low, and they are all SeeClickFix. One SeeClickFix client covers them. Palo Alto and Redwood City are both Accela PublicStuff. Redwood City's client id was not confirmed, so it stays Medium.
+Eleven cities are Low, and they are all SeeClickFix. One SeeClickFix client covers them. Palo Alto and Redwood City are both Accela PublicStuff. Palo Alto is client `406`. Redwood City is client `226`. The myRWC catalog was read on November 5, 2026.
 
-Volunteer and ETA are open. A blank row is unclaimed. To take one, open a pull request that puts your GitHub name in Volunteer and a date in ETA, then send the skill in that pull request or a follow-up. Review the other open pull requests. Palo Alto is already filed, so leave that row blank.
+Volunteer and ETA are open. A blank row is unclaimed. To take one, open a pull request that puts your GitHub name in Volunteer and a date in ETA, then send the skill in that pull request or a follow-up. Review the other open pull requests. Palo Alto and Redwood City are already filed, so leave those rows blank.
 
 ## Santa Clara County cities
 
@@ -60,7 +60,7 @@ Sunnyvale's old Dynamics form, with pole number and pole type, is retired. Stree
 | Millbrae | SeeClickFix, branded Millbrae Works | The city page names SeeClickFix. Types include Streetlight, Pothole, and a separate El Camino Real type. | API v2. 29 types at `37.5985, -122.3872`. | Low | | |
 | Pacifica | QScend | [Request for Service](https://pacificaca.qscend.com/311/request/add). Address search, current location, or a map pin. | Vendor portal. No public API found. | Medium | | |
 | Portola Valley | PV Connect | Web form for town roads, trails, trees, and dumping. The town said the phone app was dropped in October 2025. Code enforcement is email only, code@portolavalley.net. | Web form. | Medium | | |
-| Redwood City | Accela PublicStuff, branded myRWC | City page and Android package `com.publicstuff.redwood_city`. Photo and GPS. A 2025 comment cites `client_id=226`. A catalog call with that id returned an empty body. | Same product as Palo Alto. Client id not confirmed. | Medium | | |
+| Redwood City | Accela PublicStuff, branded myRWC. Client `226`. Space `29066`. | City page and app. | JSON API at `https://vc0.publicstuff.com`. Catalog is in `skills/redwood-city/catalog.json`. | Done | | |
 | San Bruno | Accela, branded San Bruno Responds | Web and app `com.accela.san_bruno_ca`. The city FAQ sends freeway issues to Caltrans and Caltrain property to (800) 660-4287. | Same publisher as Palo Alto. Client id not captured. SeeClickFix returned no types. | Medium | | |
 | San Carlos | Not confirmed | SeeClickFix returned no types. | | Not confirmed | | |
 | San Mateo | Catalis Request311, branded My San Mateo | Web portal and app, launched May 6, 2026. Street lights, graffiti, potholes. Account is optional. Email updates still go out without one. | No public API found. | High | | |
@@ -89,7 +89,7 @@ These take reports only on roads the county maintains, not on city streets.
 
 One SeeClickFix client covers Atherton, Burlingame, Daly City, Foster City, Gilroy, Hillsborough, Menlo Park, Millbrae, Milpitas, Morgan Hill, and South San Francisco. Menlo Park is the one already specified, including which answers are public. The same client then needs each city's request-type ids and a boundary so a Palo Alto photo never goes to SeeClickFix.
 
-PublicStuff is the second shared client, not the first. Palo Alto is client `406`. Redwood City ships the same Android package family. Confirm `client_id` from the live myRWC widget before writing that skill. San Bruno's app is Accela and may be the same product. That is not established.
+PublicStuff is the second shared client, not the first. Palo Alto is client `406`. Redwood City is client `226`, space `29066`, in `skills/redwood-city/`. San Bruno's app is Accela and may be the same product. That is not established.
 
 Nine cities still need a live form before they can be rated: Los Altos Hills, Monte Sereno, Belmont, Brisbane, Colma, East Palo Alto, Half Moon Bay, San Carlos, and Woodside.
 

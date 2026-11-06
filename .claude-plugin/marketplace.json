@@ -5,7 +5,7 @@
   },
   "metadata": {
     "description": "File a city 311 report from a photo.",
-    "version": "1.0.1"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -16,6 +16,7 @@
       "skills": [
         "./skills/palo-alto",
         "./skills/redwood-city",
+        "./skills/menlo-park",
         "./skills/file-311-common"
       ]
     }

@@ -1,8 +1,8 @@
 # Privacy policy
 
-Walking Cities publishes File 311. This policy describes what the Palo Alto, Redwood City, and Menlo Park skills do with personal data on your computer. They run there. Walking Cities does not receive or store that data.
+Walking Cities publishes File 311. This policy describes what the Palo Alto, Redwood City, Menlo Park, and Mountain View skills do with personal data on your computer. They run there. Walking Cities does not receive or store that data.
 
-Effective November 5, 2026.
+Effective November 7, 2026.
 
 ## Data collected
 
@@ -14,7 +14,9 @@ When you sign in, you provide the email, password, name, and phone number on you
 
 When you sign in to Menlo Park, you provide a SeeClickFix personal access token. The skill saves that token, your user id, and your display name. It does not ask for a Menlo Park password.
 
-A confirmed Palo Alto or Redwood City report can include the photo, the GPS coordinates, the address, the description you gave, the request type, and the name, email, and phone number from the account file. A confirmed Menlo Park report can include the photo, the GPS coordinates, the address, the title, the description, and the display name from the account file. That display name is public.
+Mountain View street lights do not ask for an account. The skill does not save a name, email, phone number, or password for that city.
+
+A confirmed Palo Alto or Redwood City report can include the photo, the GPS coordinates, the address, the description you gave, the request type, and the name, email, and phone number from the account file. A confirmed Menlo Park report can include the photo, the GPS coordinates, the address, the title, the description, and the display name from the account file. That display name is public. A confirmed Mountain View street-light report can include the photo, the address written into the request text, and the description. The letter and the photo are public records.
 
 ## Purposes
 
@@ -30,6 +32,8 @@ The City of Redwood City myRWC service, at `vc0.publicstuff.com`, receives the R
 
 SeeClickFix, at `seeclickfix.com`, receives the Menlo Park token check and, after you agree, the Menlo Park report. The title, description, photo, and map pin are public.
 
+Comcate, at `clients.comcate.com`, receives the Mountain View street-light report after you agree. The letter and the photo are public records. The report is anonymous.
+
 The chat app you are using, such as Cursor, Claude, or Codex, sees the preview because the skill prints it in the conversation.
 
 Walking Cities is not a recipient. Nothing is sent to Walking Cities.
@@ -39,6 +43,8 @@ Walking Cities is not a recipient. Nothing is sent to Walking Cities.
 `~/.config/paloalto311/account.json` and `~/.config/myrwc/account.json` keep the email, name, phone number, and API key until you delete that file. `~/.config/paloalto311/preview.json` and `~/.config/myrwc/preview.json` keep the draft until you delete it. These files are mode `600`.
 
 `~/.config/menlopark311/account.json` keeps the SeeClickFix token, user id, and display name until you delete that file. `~/.config/menlopark311/preview.json` keeps the Menlo Park draft until you delete it. These files are mode `600`. The Menlo Park token is kept. A Menlo Park password is not.
+
+`~/.config/mountainview311/preview.json` keeps the Mountain View draft until you delete it. That file is mode `600`. There is no Mountain View account file.
 
 The password is not kept.
 

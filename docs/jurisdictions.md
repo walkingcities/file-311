@@ -1,6 +1,6 @@
 # Jurisdictions
 
-Palo Alto, Redwood City, and Menlo Park are the places this repo files. A photo outside that city is refused. Another jurisdiction is a new folder under `skills/`, using the same photo, GPS, and preview-before-send flow. A row that is not Done is not built.
+Palo Alto, Redwood City, Menlo Park, and Mountain View are the places this repo files. A photo outside that city is refused. Another jurisdiction is a new folder under `skills/`, using the same photo, GPS, and preview-before-send flow. A row that is not Done is not built.
 
 Palo Alto's request-type list and photo runs are `docs/palo-alto/catalog.md` and `docs/palo-alto/runs.md`. The next city gets the same pair, `docs/<city>/catalog.md` and `docs/<city>/runs.md`. This file stays the list of every jurisdiction.
 
@@ -16,7 +16,7 @@ Effort is the work to add a skill like Palo Alto. Photo GPS, JPEG conversion, an
 
 Ten cities are still Low, and they are all SeeClickFix. Menlo Park is the SeeClickFix skill that is filed. Palo Alto and Redwood City are both Accela PublicStuff. Palo Alto is client `406`. Redwood City is client `226`. The myRWC catalog was read on November 5, 2026.
 
-Volunteer and ETA are open. A blank row is unclaimed. To take one, open a pull request that puts your GitHub name in Volunteer and a date in ETA, then send the skill in that pull request or a follow-up. Review the other open pull requests. Palo Alto, Redwood City, and Menlo Park are already filed, so leave those rows blank.
+Volunteer and ETA are open. A blank row is unclaimed. To take one, open a pull request that puts your GitHub name in Volunteer and a date in ETA, then send the skill in that pull request or a follow-up. Review the other open pull requests. Palo Alto, Redwood City, Menlo Park, and Mountain View are already filed, so leave those rows blank.
 
 ## Santa Clara County cities
 
@@ -31,14 +31,14 @@ Volunteer and ETA are open. A blank row is unclaimed. To take one, open a pull r
 | Milpitas | SeeClickFix, City of Milpitas | API types include Street Lighting, Street Lights, Pothole/Roadway Repairs, and Sidewalk Repair. The city also links a Milpitas app. | API v2. 30 types at `37.4323, -121.8996`. | Low | | |
 | Monte Sereno | Not confirmed | SeeClickFix returned no types. An older list pointed at a CivicPlus form. | | Not confirmed | | |
 | Morgan Hill | SeeClickFix, City of Morgan Hill | The city announced SeeClickFix for street lights, sidewalks, potholes, graffiti, and dumping. | API v2. 59 types at `37.1305, -121.6544`. | Low | | |
-| Mountain View | Comcate, branded Ask Mountain View. Government id `128`. | [Ask Mountain View](https://clients.comcate.com/newrequest.php?id=128) and the city app. New user, existing user, or anonymous. | No public API. The page embeds 43 topics and 283 subtopics. Custom fields come from `POST ajax_customfields.php`, which returned an empty body without a session. | Medium | | |
+| Mountain View | Comcate, branded Ask Mountain View. Government id `128`. | [Ask Mountain View](https://clients.comcate.com/newrequest.php?id=128) and the city app. Street lights are anonymous. | The skill posts the HTML form. Street Lights is subtopic `10878`. Catalog is in `skills/mountain-view/catalog.json`. Notes are in [docs/mountain-view/api.md](mountain-view/api.md). | Done | | |
 | Palo Alto | Accela PublicStuff. Client `406`. | PaloAlto311 site and app. | JSON API at `https://vc0.publicstuff.com`. Catalog is in `skills/palo-alto/catalog.json`. | Done | | |
 | San José | Oracle Service Cloud, app by AST. Branded San José 311. | [San José 311](https://www.sanjoseca.gov/your-government/departments-offices/customer-service/san-jos-311) and app `com.astcorporation.three11`. Anonymous or account. Photos and a map. | No public citizen API found. | High | | |
 | Santa Clara | MySantaClara | The city tells people to use the app for sidewalks, potholes, trees, and graffiti. Vendor was not on the page. | SeeClickFix returned no types. | High | | |
 | Saratoga | CivicPlus Fix It Form and Citizen Request Tracker | [Fix It Form](https://www.saratoga.ca.us/FormCenter/Report-a-Concern-6/Fix-It-Form-45). Checkboxes include pothole, street lights, sidewalk, and signals. | HTML form. | Medium | | |
 | Sunnyvale | MySunnyvale. Salesforce Public Sector Solutions. | Web portal and the MySunnyvale CA app. Replaced Access Sunnyvale on June 22, 2026. | No public citizen API. The city page returned HTTP 403, so the live form was not read. | High | | |
 
-Mountain View street lights are subtopic `10878`. The page's location widget is on for potholes and sidewalks and off for street lights, so a street-light report may be a typed address. Those custom fields still need a logged-in session.
+Mountain View street lights are filed in `skills/mountain-view/`. Subtopic `10878` has the location widget off, so the address is written into the request text. The report is anonymous. Potholes (`11266`), sidewalks (`18005`), and the other subtopics are not built. There is still no citizen create API. The write-up is [docs/mountain-view/api.md](mountain-view/api.md).
 
 Sunnyvale's old Dynamics form, with pole number and pole type, is retired. Street lights and potholes can be called in at (408) 730-7415 until the new portal is readable.
 

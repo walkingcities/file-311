@@ -1,0 +1,314 @@
+[
+  {
+    "id": 94209,
+    "name": "Downtown Parking Machine",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Parking machine malfunction.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94210,
+    "name": "Dumping (larger waste, debris, bulky items, etc.)",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Larger waste items discarded on public streets, alleys, sidewalks, or other public property. Please do not report litter (e.g. waste that could be blown away by wind). For information on free bulky item pick up, contact Recology at 650-595-3900 or visit https://www.recology.com/recology-san-mateo-county/bulky-items/",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94211,
+    "name": "EV Chargers",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Public EV charger malfunction.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 30942,
+    "name": "Flooding",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "**NOTE**This is for reporting minor localized flooding or ponding. DO NOT report any life threatening conditions through this system. Please contact 911 if this is an emergency.",
+    "note_public": true,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 131037,
+    "name": "Gas leaf blower/string trimmer use",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "If gas-powered leaf blower use is currently in progress, call the non-emergency line at 650-330-6300 for a potential real-time response. For past incidents, please include the date and time of the violation. An informational letter will be sent to the reported property about the zero emission landscaping equipment ordinance.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 100710,
+    "name": "General Code Enforcement Issue",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "For non-permitted construction, noise ordinance violations, weekend construction, etc.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 22023,
+    "name": "Graffiti",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "If graffiti is in progress, please dial the non-emergency number, 650-330-6300. City crews address graffiti on public property. Please provide photos to help with the location and issue. Private property owners and utility companies are responsible for graffiti removal on their property.",
+    "note_public": true,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94242,
+    "name": "Park Restrooms",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": true,
+    "note": "Clogged toilets, no water coming from sink, no paper products, lights out in restroom. Please call 650-330-6780",
+    "note_public": false,
+    "fields": []
+  },
+  {
+    "id": 94212,
+    "name": "Parks and Playgrounds repairs",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Playground repairs, park maintenance, drinking fountains and irrigation issues. Note: Flood Park is maintained by County of San Mateo (650) 363-4100.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94213,
+    "name": "Potholes",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Potholes (small bowl-shaped depressions in the street pavement). If it is safe to do so, please include photographs to assist crews with the location. Potholes on Willow Road, Bayshore Rd and/or El Camino Real are repaired by Caltrans. To submit a Caltrans request, please call (916) 654-5266 or visit http://www.dot.ca.gov/hq/maint/msrsubmit.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94214,
+    "name": "Public signs",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Damaged existing traffic, parking and other public signs.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94215,
+    "name": "Sidewalks",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Sidewalk tripping hazards. City performs temporary repairs on all sidewalks. For hazards not caused by City trees, abutting property owners are responsible for permanent repairs. https://www.menlopark.gov/sidewalks",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 22033,
+    "name": "Street Sweeping",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Missed street sweep. For street sweep schedule, visit: https://www.menlopark.gov/Streetsweeping",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94216,
+    "name": "Street and curb striping and painting",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Street and curb stripping and painting maintenance.",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94217,
+    "name": "Streetlight",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Existing streetlight issues (broken, outages or on all day). -  For streetlights on electric poles please call PG&E 1-877-660-6789",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 22027,
+    "name": "Traffic Enforcement",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "For vehicles parked illegally in a red zone or blocking driveway, please call Police dispatch at 650-330-6300 for immediate response.",
+    "note_public": true,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 32517,
+    "name": "Traffic Signal Issue",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": true,
+    "note": "Please call 650-330-6300 for traffic signal outages",
+    "note_public": false,
+    "fields": []
+  },
+  {
+    "id": 94218,
+    "name": "Trees",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Tree issues (branch/tree down, visibility of traffic signs/signals, blocking street/sidewalk, dead/unstable, other).",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94219,
+    "name": "Water System",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Water system issues for Menlo Park Municipal Water customers. For Cal Water, please call 650-561-9709. Water providers look up: https://menlopark.maps.arcgis.com/apps/InformationLookup/index.html?appid=e61f0eed1e7f46119f75a5e2d297a358",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  },
+  {
+    "id": 94220,
+    "name": "Weed control on public land",
+    "organization": "Menlo Park",
+    "permit_guest_reporting": false,
+    "permit_anonymous_reporting": false,
+    "private_visibility": false,
+    "block_submission": false,
+    "note": "Weed control on street medians and City owned land and facilities. For Dumbarton railroad tracks please call SamTrans (650) 508-6200",
+    "note_public": false,
+    "fields": [
+      {"id": "summary", "name": "Issue Title", "type": "text", "required": true, "public": true},
+      {"id": "description", "name": "Description", "type": "textarea", "required": false, "public": true},
+      {"id": "issue_image", "name": "Image", "type": "file", "required": false, "public": true}
+    ]
+  }
+]

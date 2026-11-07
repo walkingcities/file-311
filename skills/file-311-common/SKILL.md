@@ -3,7 +3,7 @@ name: file-311-common
 description: >-
   Shared photo and geocoding code for file-311 city skills. Do not use this
   skill to file a report or when someone drops a photo. Use the city skill,
-  such as palo-alto, redwood-city, or menlo-park.
+  such as palo-alto, redwood-city, menlo-park, or mountain-view.
 ---
 
 # file-311 common

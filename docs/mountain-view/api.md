@@ -6,7 +6,7 @@ The resident channel is still Ask Mountain View, Comcate government id `128`: [t
 
 The mobile apps are the same product. iOS is Ask Mountain View Mobile, id `370409740`, version 6.0.2, updated June 11, 2018, copyright Comcate. Android is `comcate128.android`. Neither store listing publishes an API.
 
-Effort stays Medium. A skill would post the same HTML form a resident posts. It would not be a JSON client like Palo Alto, Redwood City, or Menlo Park.
+Street Lights is filed by `skills/mountain-view/`. That skill posts this HTML form. It is not a JSON client like Palo Alto, Redwood City, or Menlo Park. Other subtopics are not built.
 
 ## Checks for a create API
 

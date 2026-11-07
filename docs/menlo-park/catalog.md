@@ -2,7 +2,7 @@
 
 Every request type in [`skills/menlo-park/catalog.json`](../../skills/menlo-park/catalog.json). A checkmark in the Run column links to that photo run in [`runs.md`](runs.md). This file is Menlo Park only. The list of other places is [`../jurisdictions.md`](../jurisdictions.md).
 
-Streetlight is covered offline by [`tests/test_menlo_park_street_light.py`](../../tests/test_menlo_park_street_light.py). That test uses a stand-in photo and does not call the city. There is no camera-photo run yet.
+Streetlight is covered offline by [`tests/test_menlo_park_street_light.py`](../../tests/test_menlo_park_street_light.py). That test uses a stand-in photo and does not call the city. The camera-photo run is [Street light out, November 7, 2026](runs.md#street-light-out-november-7-2026).
 
 ## Source
 
@@ -34,7 +34,7 @@ Retired street-light id 15864, used by an older public request, now returns 404.
 |  | 94215 | [Sidewalks](#sidewalks) |
 |  | 22033 | [Street Sweeping](#street-sweeping) |
 |  | 94216 | [Street and curb striping and painting](#street-and-curb-striping-and-painting) |
-|  | 94217 | [Streetlight](#streetlight) |
+| [✅](runs.md#street-light-out-november-7-2026) | 94217 | [Streetlight](#streetlight) |
 |  | 22027 | [Traffic Enforcement](#traffic-enforcement) |
 |  | 32517 | [Traffic Signal Issue](#traffic-signal-issue) |
 |  | 94218 | [Trees](#trees) |
@@ -128,6 +128,8 @@ Street and curb stripping and painting maintenance.
 Id 94216. The report is public. Guest and anonymous reporting are off. A title is required. Description and image are optional.
 
 ### Streetlight
+
+Example run recorded. See [Street light out, November 7, 2026](runs.md#street-light-out-november-7-2026).
 
 Existing streetlight issues (broken, outages or on all day). - For streetlights on electric poles please call PG&E 1-877-660-6789
 

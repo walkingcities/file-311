@@ -80,7 +80,7 @@ A photo outside the chosen city is refused.
 
 A Menlo Park street light uses ACT Menlo Park, request type Streetlight. The title, description, photo, and map pin are public. The SeeClickFix display name is public too. Lights on electric poles are PG&E, 1-877-660-6789.
 
-[docs/palo-alto/catalog.md](docs/palo-alto/catalog.md) lists every Palo Alto request type. A checkmark in its Run column links to the matching photo run in [docs/palo-alto/runs.md](docs/palo-alto/runs.md). [docs/redwood-city/catalog.md](docs/redwood-city/catalog.md) lists Redwood City. There is no Redwood City camera-photo run yet. [docs/menlo-park/catalog.md](docs/menlo-park/catalog.md) lists Menlo Park. There is no Menlo Park camera-photo run yet.
+[docs/palo-alto/catalog.md](docs/palo-alto/catalog.md) lists every Palo Alto request type. A checkmark in its Run column links to the matching photo run in [docs/palo-alto/runs.md](docs/palo-alto/runs.md). [docs/redwood-city/catalog.md](docs/redwood-city/catalog.md) lists Redwood City. There is no Redwood City camera-photo run yet. [docs/menlo-park/catalog.md](docs/menlo-park/catalog.md) lists Menlo Park. A checkmark in its Run column links to the matching photo run in [docs/menlo-park/runs.md](docs/menlo-park/runs.md#street-light-out-november-7-2026).
 
 A JPEG works on any computer. The Python script reads its location. A HEIC photo needs a Mac: Swift reads the location, and `sips` converts it for upload. The Swift file is `skills/file-311-common/photo-gps.swift`. The compiled binary is not part of this repo. On Linux or Windows, export the photo as a JPEG.
 
@@ -88,7 +88,7 @@ A JPEG works on any computer. The Python script reads its location. A HEIC photo
 
 The first Palo Alto report asks for the PaloAlto311 email, password, name, and phone. You need an account on the city's 311 site, [Report an Issue](https://www.paloalto.gov/Residents/Services/Report-an-Issue). The password is passed only as an environment variable and is not saved. Email, name, phone, and the API key are stored in `~/.config/paloalto311/account.json` with mode `600`. Deleting that file signs you out. Later reports reuse it. Redwood City keeps its own account in `~/.config/myrwc/account.json`.
 
-Menlo Park uses a different sign-in. Create an ACT Menlo Park account, then a CivicPlus personal access token from Password and Security. Copy only the value that starts with `--`. The token is saved in `~/.config/menlopark311/account.json` with mode `600`. Deleting that file signs you out.
+Menlo Park uses a different sign-in. Create an ACT Menlo Park account, then a CivicPlus personal access token from the API users page: https://seeclickfix.com/manage/users/2949404/api_users. Copy only the value that starts with `--`. Leave off the name and date shown before it. The token is saved in `~/.config/menlopark311/account.json` with mode `600`. Deleting that file signs you out.
 
 ## Run the script
 

@@ -2,7 +2,7 @@
 
 Every request type in [`skills/redwood-city/catalog.json`](../../skills/redwood-city/catalog.json). A checkmark in the Run column links to that photo run in [`runs.md`](runs.md). This file is Redwood City only. The list of other places is [`../jurisdictions.md`](../jurisdictions.md).
 
-Street Light Outage is covered offline by [`tests/test_redwood_city_street_light.py`](../../tests/test_redwood_city_street_light.py). That test uses a stand-in photo and does not call the city. There is no camera-photo run yet.
+Street Light Outage is covered offline by [`tests/test_redwood_city_street_light.py`](../../tests/test_redwood_city_street_light.py). That test uses a stand-in photo and does not call the city. The camera-photo run is [Street light broken, November 8, 2026](runs.md#street-light-broken-november-8-2026).
 
 ## Source
 
@@ -56,7 +56,7 @@ The response lists `response.request_types[].request_type`. The file keeps `id`,
 |  | 32017 | [Sign Repair](#sign-repair) |
 |  | 27268 | [Dayburner](#dayburner) |
 |  | 2499 | [Other Street Light Problem](#other-street-light-problem) |
-|  | 27267 | [Street Light Outage](#street-light-outage) |
+| [✅](runs.md#street-light-broken-november-8-2026) | 27267 | [Street Light Outage](#street-light-outage) |
 |  | 2498 | [Traffic Signal Problem](#traffic-signal-problem) |
 |  | 1004760 | [Graffiti Removal - Private Property](#graffiti-removal---private-property) |
 |  | 30400 | [Illegal Dumping on Private Property](#illegal-dumping-on-private-property) |
@@ -407,6 +407,8 @@ Id 2499. The city forces this report private. An address is not required.
 - Electrical wires fell on the street. (3332, checkbox, optional).
 
 ### Street Light Outage
+
+Example run recorded. See [Street light broken, November 8, 2026](runs.md#street-light-broken-november-8-2026).
 
 Street light bulb out.
 
